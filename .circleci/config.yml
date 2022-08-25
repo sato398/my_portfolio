@@ -67,9 +67,9 @@ jobs:
     docker:
       - image: cimg/base:edge
         parameters:
-    env:
-      type: enum
-      enum: ["staging", "product"]
+    # env:
+    #   type: enum
+    #   enum: ["staging", "product"]
     parameters:
       fingerprints:
         type: string
@@ -105,7 +105,7 @@ workflows:
       - Deploy:
           requires:
             - Test
-          env: staging
+          # env: staging
           fingerprints: ${FINGER_POINTS}
           host: ${SSH_HOST}
           sh_dir: ${SSH_SH_DIR}
