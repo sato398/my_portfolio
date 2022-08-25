@@ -1,0 +1,115 @@
+version: 2.1
+
+orbs:
+  php: circleci/php@1.1.0
+  node: circleci/node@5.0.2
+
+jobs:
+  #=================================
+  # Test
+  #=================================
+  Test:
+    docker:
+      - image: cimg/php:8.0-node
+        environment:
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: test_db
+          DB_USERNAME: user
+          DB_PASSWORD: secret
+      - image: cimg/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: secret
+    steps:
+      - checkout
+      - php/install-packages:
+          cache-version: test
+
+      - run:
+          name: apt update
+          command: sudo apt update
+
+      - run:
+          name: wait for mysql
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      - run:
+          name: setup laravel
+          command: |
+            cp .env.example .env.testing
+            php artisan key:generate --env=testing
+            php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+            php artisan migrate --env=testing
+
+      - node/install-packages:
+          cache-version: test
+
+      - run:
+          name: npm build
+          command: npm run prod
+
+      - run:
+          name: testing
+          command: |
+            mkdir -p phpunit
+            phpdbg -qrr ./vendor/bin/phpunit --log-junit phpunit/junit.xml --coverage-html phpunit/coverage-report
+      - store_test_results:
+          path:  phpunit
+      - store_artifacts:
+          path:  phpunit/coverage-report
+
+  #=================================
+  # Deploy
+  #=================================
+  Deploy:
+    docker:
+      - image: cimg/base:edge
+        parameters:
+    env:
+      type: enum
+      enum: ["staging", "product"]
+    parameters:
+      fingerprints:
+        type: string
+      host:
+        type: string
+      sh_dir:
+        type: string
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+          - << parameters.fingerprints >>
+      - run:
+          name: Deploy
+          command: |
+            ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no -T ${SSH_USER}@<< parameters.host >> "\
+            cd << parameters.sh_dir >> && \
+            sh deploy.sh"
+
+
+workflows:
+  version: 2
+  Test:
+    jobs:
+      - Test:
+        filters:
+          branches:
+            ignore:
+              - master
+  Build-and-Deploy:
+    jobs:
+      - Test
+      - Deploy:
+          requires:
+            - Test
+          env: staging
+          fingerprints: ${FINGER_POINTS}
+          host: ${SSH_HOST}
+          sh_dir: ${SSH_SH_DIR}
+          filters:
+            branches:
+              # only: master
+              only: main

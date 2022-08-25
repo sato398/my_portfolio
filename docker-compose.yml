@@ -1,0 +1,38 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        depends_on:
+        - mysql
+        volumes:
+        - ./:/var/www/html/portfolio
+    nginx:
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+        - "80:80"
+        depends_on:
+        - php
+        volumes:
+        - ./:/var/www/html/portfolio
+    mysql:
+        build:
+            context: .
+            dockerfile: ./docker/mysql/Dockerfile
+        ports:
+        - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            TZ: 'Asia/Tokyo'
+        volumes:
+        - ./mysql:/var/lib/mysql"
+volumes:
+  mysql-volume:
