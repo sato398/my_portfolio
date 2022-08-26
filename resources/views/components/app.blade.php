@@ -5,7 +5,7 @@
 
     @livewireStyles
 </head>
-<body>
+<body id="page-top">
     {{ $header ?? '' }}
 
     {{ $content ?? '' }}
