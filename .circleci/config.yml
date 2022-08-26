@@ -101,7 +101,11 @@ workflows:
               - master
   Build-and-Deploy:
     jobs:
-      - Test
+      - Test:
+          filters:
+            branches:
+              # only: master
+              only: main
       - Deploy:
           requires:
             - Test
