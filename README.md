@@ -8,8 +8,8 @@ $ cp .env.example .env
 $ php artisan key:generate
 $ php artisan storage:link
 
-$ ./vendor/bin/sail build --no-cache
-$ ./vendor/bin/sail up
+$ docker-compose build --no-cache
+$ docker-compose up -d
 
 $ php artisan migrate
 $ php artisan admin:install
