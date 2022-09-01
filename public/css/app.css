@@ -1,3 +1,221 @@
-.service-items :nth-child(n+5) {
-  margin-top: 20px;
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  word-break: break-all !important;
+  white-space: normal !important;
+}
+
+.isWhite {
+  color: #fff !important;
+}
+@media (min-width: 768px) {
+  .isWhite:hover {
+    opacity: 0.7;
+  }
+}
+.isWhite:active {
+  opacity: 0.7;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+}
+@media (min-width: 992px) {
+  .navbar {
+    padding-left: 45%;
+  }
+}
+@media (min-width: 768px) {
+  .navbar {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 0px) {
+  .navbar-nav {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-nav {
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .navber-inner {
+    width: auto;
+  }
+}
+
+.nav-item {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .nav-item {
+    text-align: left;
+  }
+}
+
+.nav-link {
+  font-family: "rhythm-one", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@media (min-width: 0px) {
+  .nav-link {
+    font-size: 36px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-link {
+    font-size: 24px;
+  }
+}
+
+.top-contents {
+  background-image: url(/storage/images/nasa-yZygONrUBe8-unsplash.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
+}
+
+.top-name {
+  font-family: "lust-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@media (min-width: 0px) {
+  .service-container-wrap:not(:first-of-type) .service-items, .service-container-wrap:not(:last-of-type) .service-items {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  .service-container-wrap:not(:first-of-type) .service-items, .service-container-wrap:not(:last-of-type) .service-items {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .service-container-wrap:not(:first-of-type) .service-items, .service-container-wrap:not(:last-of-type) .service-items {
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+  }
+}
+.service-container-wrap:first-of-type .service-items {
+  padding-top: 7.5rem;
+}
+.service-container-wrap:last-of-type .service-items {
+  padding-bottom: 7.5rem;
+}
+
+@media (min-width: 0px) {
+  .service-item-head-wrap {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .service-item-head-wrap {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.service-item-head {
+  font-family: "rhythm-one", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.service-item-body {
+  margin-top: 100px;
+}
+@media (min-width: 0px) {
+  .service-item-body {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .service-item-body {
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 0px) {
+  .service-item:nth-child(n) {
+    margin-top: 0px;
+  }
+  .service-item:nth-child(n+2) {
+    margin-top: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .service-item:nth-child(n) {
+    margin-top: 0px;
+  }
+  .service-item:nth-child(n+3) {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 992px) {
+  .service-item:nth-child(n) {
+    margin-top: 0px;
+  }
+  .service-item:nth-child(n+5) {
+    margin-top: 50px;
+  }
+}
+
+.service-gradation {
+  height: 200px;
+  width: 100%;
+}
+@media (min-width: 0px) {
+  .service-gradation {
+    height: 100px;
+  }
+}
+.service-gradation:nth-of-type(odd) {
+  background-image: linear-gradient(180deg, rgb(29, 128, 159), rgb(25, 135, 84));
+}
+.service-gradation:nth-of-type(even) {
+  background-image: linear-gradient(180deg, rgb(25, 135, 84), rgb(29, 128, 159));
+}
+
+.content-section {
+  background-image: url(/storage/images/autumn-gce78e5125_1920.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
+}
+
+.portfolio-item-wrap:not(:first-of-type) {
+  margin-top: 100px;
+}
+
+@media (min-width: 0px) {
+  .portfolio-item-head-wrap {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .portfolio-item-head-wrap {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.portfolio-item-head {
+  font-family: "rhythm-one", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

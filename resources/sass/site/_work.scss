@@ -1,0 +1,33 @@
+.content-section{
+    // background-color: rgb(168, 255, 243);
+    background-image: url(/storage/images/autumn-gce78e5125_1920.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, .5);
+    background-blend-mode: lighten;
+}
+
+.portfolio-item-wrap{
+    &:not(:first-of-type){
+        margin-top: 100px;
+    }
+}
+
+.portfolio-item-head-wrap{
+    @include sx {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    @include lg {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+}
+
+.portfolio-item-head {
+    font-family: 'rhythm-one', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}

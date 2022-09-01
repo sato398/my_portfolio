@@ -5,7 +5,7 @@
 
     @livewireStyles
 </head>
-<body id="page-top">
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="77">
     {{ $header ?? '' }}
 
     {{ $content ?? '' }}

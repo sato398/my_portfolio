@@ -1,0 +1,68 @@
+header{
+
+}
+
+.isWhite{
+    color: #fff !important;
+
+    @include md{
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+
+    &:active{
+        opacity: 0.7;
+    }
+}
+
+.navbar{
+    @include lg{
+        padding-left: 45%;
+    }
+
+    @include md{
+        justify-content: center;
+    }
+
+    background-color: rgba($color: #fff, $alpha: 0.7);
+    backdrop-filter: blur(12px);
+}
+
+.navbar-nav{
+    @include sx{
+        margin-top: 30px;
+    }
+
+    @include md{
+        margin: 0;
+    }
+}
+
+.navber-inner{
+    @include md{
+        width: auto;
+    }
+}
+
+.nav-item{
+    text-align: center;
+
+    @include md{
+        text-align: left;
+    }
+}
+
+.nav-link{
+    font-family: 'rhythm-one', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    @include sx {
+        font-size: 36px;
+    }
+
+    @include md {
+        font-size: 24px;
+    }
+}

@@ -7,4 +7,5 @@
 <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
 <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
 <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.compiled.css">
+<link rel="stylesheet" href="https://use.typekit.net/czf3wxx.css">
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
