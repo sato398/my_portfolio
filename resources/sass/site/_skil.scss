@@ -1,3 +1,7 @@
+.service-section{
+
+}
+
 .service-container-wrap{
     @include sx {
         &:not(:first-of-type), &:not(:last-of-type){
@@ -104,19 +108,44 @@
     }
 }
 
+
 .service-gradation {
     height: 200px;
     width: 100%;
+    position: relative;
 
     @include sx {
         height: 100px;
     }
 
-    &:nth-of-type(odd){
+    &.is-odd{
         background-image: linear-gradient(180deg, rgba(29, 128, 159, 1), rgba(25, 135, 84, 1));
     }
 
-    &:nth-of-type(even){
+    &.is-even{
         background-image: linear-gradient(180deg, rgba(25, 135, 84, 1), rgba(29, 128, 159, 1));
+    }
+}
+
+.service-section-arrow {
+    border: 3px solid #fff;
+    border-top: none;
+    border-left: none;
+    bottom: 80%;
+    animation:  service-fadeIn 2s ease 1s infinite normal backwards;
+}
+
+@keyframes service-fadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -25%) rotate(45deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, 0%) rotate(45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 25%) rotate(45deg);
     }
 }

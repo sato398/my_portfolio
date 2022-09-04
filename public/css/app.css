@@ -74,6 +74,10 @@
   }
 }
 
+.st0 {
+  fill: #FFFFFF;
+}
+
 .top-contents {
   background-image: url(/storage/images/nasa-yZygONrUBe8-unsplash.jpg);
   background-attachment: fixed;
@@ -81,6 +85,7 @@
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode: lighten;
+  height: 100vh;
 }
 
 .top-name {
@@ -175,19 +180,58 @@
 .service-gradation {
   height: 200px;
   width: 100%;
+  position: relative;
 }
 @media (min-width: 0px) {
   .service-gradation {
     height: 100px;
   }
 }
-.service-gradation:nth-of-type(odd) {
+.service-gradation.is-odd {
   background-image: linear-gradient(180deg, rgb(29, 128, 159), rgb(25, 135, 84));
 }
-.service-gradation:nth-of-type(even) {
+.service-gradation.is-even {
   background-image: linear-gradient(180deg, rgb(25, 135, 84), rgb(29, 128, 159));
 }
 
+.service-section-arrow {
+  border: 3px solid #fff;
+  border-top: none;
+  border-left: none;
+  bottom: 80%;
+  -webkit-animation: service-fadeIn 2s ease 1s infinite normal backwards;
+          animation: service-fadeIn 2s ease 1s infinite normal backwards;
+}
+
+@-webkit-keyframes service-fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -25%) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 25%) rotate(45deg);
+  }
+}
+
+@keyframes service-fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -25%) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 25%) rotate(45deg);
+  }
+}
 .content-section {
   background-image: url(/storage/images/autumn-gce78e5125_1920.jpg);
   background-attachment: fixed;
@@ -218,4 +262,112 @@
   font-family: "rhythm-one", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.about-section-wrap {
+  scroll-snap-type: y mandatory;
+  overflow: scroll;
+  height: 100vh;
+}
+
+.about-section {
+  scroll-snap-align: start;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.about-section#more {
+  background-image: url(/storage/images/office-ge4b71a64b_1920.jpg);
+}
+@media (min-width: 768px) {
+  .about-section#more .about-inner {
+    text-align: start;
+  }
+}
+.about-section#hobby {
+  background-image: url(/storage/images/nik-korba-3WceTBlUoMs-unsplash.jpg);
+}
+@media (min-width: 768px) {
+  .about-section#hobby .about-inner {
+    text-align: center;
+  }
+}
+.about-section#laravel {
+  background-image: url(/storage/images/mohammad-rahmani-Y5yxdx2a4PI-unsplash.jpg);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .about-section#laravel .about-inner {
+    text-align: start;
+  }
+}
+
+@media (min-width: 0px) {
+  .about-inner {
+    text-align: center;
+  }
+}
+
+.brand-heading {
+  font-size: 72px;
+  font-family: "madre-script", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.intro-text {
+  font-size: 18px;
+}
+
+.section-arrow {
+  position: absolute;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+
+.about-section-arrow {
+  border: 3px solid #333;
+  border-top: none;
+  border-left: none;
+  bottom: 5%;
+  -webkit-animation: about-fadeIn 2s ease 1s infinite normal backwards;
+          animation: about-fadeIn 2s ease 1s infinite normal backwards;
+}
+
+@-webkit-keyframes about-fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -25%) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
+}
+
+@keyframes about-fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -25%) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
 }
