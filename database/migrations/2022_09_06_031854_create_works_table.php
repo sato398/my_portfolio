@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->foreignId('work_category_id')
             ->nullable()
             ->constrained()

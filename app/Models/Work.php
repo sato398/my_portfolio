@@ -15,6 +15,7 @@ class Work extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'work_category_id',
         'explanation',
     ];
