@@ -18,6 +18,8 @@ class Work extends Model
         'slug',
         'work_category_id',
         'explanation',
+        'sort',
+        'parent_id',
     ];
 
     public function category()

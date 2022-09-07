@@ -12,6 +12,8 @@ class BaseToolCategory extends Model
 
     protected $fillable = [
         'name',
+        'sort',
+        'parent_id',
     ];
 
     public function baseTools()
