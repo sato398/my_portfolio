@@ -15,8 +15,8 @@ class Skil extends Model
         'years_of_dev',
     ];
 
-    public function baseTool()
+    public function baseTools()
     {
-        return $this->belongsTo(BaseTool::class);
+        return $this->hasMany(BaseTool::class);
     }
 }

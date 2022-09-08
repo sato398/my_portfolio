@@ -12,5 +12,10 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('home');
-
+    $router->resource('base-tool-categories', 'BaseToolCategoryController');
+    $router->resource('base-tools', 'BaseToolController');
+    $router->resource('base-positions', 'BasePositionController');
+    $router->resource('works', 'WorkController');
+    $router->resource('work-categories', 'WorkCategoryController');
+    $router->resource('skils', 'SkilController');
 });

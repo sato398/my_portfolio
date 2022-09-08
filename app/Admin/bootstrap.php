@@ -1,5 +1,8 @@
 <?php
 
+use Encore\Admin\Form;
+use App\Admin\Extensions\Form\CKEditor;
+
 /**
  * Laravel-admin - admin builder based on Laravel.
  * @author z-song <https://github.com/z-song>
@@ -18,4 +21,5 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor']);
+Form::forget(['map', 'editor']);
+Form::extend('ckeditor', CKEditor::class);
