@@ -13,7 +13,7 @@ class Skil extends Model
 
     protected $fillable = [
         'slug',
-        'skil_category_id',
+        'base_category_id',
         'explanation',
         'sort',
         'parent_id',

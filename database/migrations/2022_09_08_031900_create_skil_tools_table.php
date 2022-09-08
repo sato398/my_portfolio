@@ -20,6 +20,7 @@ return new class extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('icon');
             // $table->foreignId('base_tool_id')
             // ->nullable()
             // ->constrained()

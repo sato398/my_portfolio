@@ -14,7 +14,8 @@ class SkilTool extends Model
     protected $fillable = [
         'skil_id',
         'base_tool_id',
-        'years_of_dev'
+        'years_of_dev',
+        'icon',
     ];
 
     public function skil()

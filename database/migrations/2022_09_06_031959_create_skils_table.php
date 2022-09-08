@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('skils', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('skil_category_id')
+            $table->foreignId('base_category_id')
             ->nullable()
             ->constrained()
             ->onUpdate('cascade')

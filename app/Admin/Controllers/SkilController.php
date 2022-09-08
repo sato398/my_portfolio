@@ -9,6 +9,9 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
 
+use App\Models\BaseToolCategory;
+use App\Models\BaseTool;
+
 class SkilController extends AdminController
 {
     /**
@@ -28,7 +31,7 @@ class SkilController extends AdminController
         $grid = new Grid(new Skil());
 
         // $grid->column('id', __('Id'));
-        $grid->column('base_tool_id', 'ツール名');
+        $grid->column('base_category_id', 'カテゴリー名');
         $grid->column('years_of_dev', '開発年数');
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
@@ -51,7 +54,7 @@ class SkilController extends AdminController
         $show = new Show(Skil::findOrFail($id));
 
         // $show->field('id', __('Id'));
-        $show->field('base_tool_id', 'ツール名');
+        $show->field('base_category_id', 'カテゴリー名');
         $show->field('years_of_dev', '開発年数');
         // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
@@ -73,8 +76,25 @@ class SkilController extends AdminController
     {
         $form = new Form(new Skil());
 
-        $form->select('base_tool_id', 'ツール名');
-        $form->select('years_of_dev', '開発年数');
+        $form->select('base_category_id', 'カテゴリー名')
+        ->options(
+            BaseToolCategory::orderBy('sort', 'asc')->get()
+            ->pluck('name', 'id')
+        )->rules('required|exists:App\Models\BaseToolCategory,id');
+        $form->hasMany('tools', 'ツール', function(Form\NestedForm $toolsForm) use($form){
+            $toolsForm->select('base_tool_id', 'ツール名')
+            ->options(
+                  BaseTool::orderBy('sort', 'asc')->get()
+                ->pluck('name', 'id')
+            )->rules('required|exists:App\Models\BaseTool,id');
+            $toolsForm->text('years_of_dev', '開発年数');
+            $toolsForm->text('icon', 'アイコン');
+
+            // $toolsForm->saving(function($toolsForm) use($form){
+            //     $id = $form->input('id');
+            //     $toolsForm->skil_id = $id;
+            // });
+        })->useTable();
 
         return $form;
     }
