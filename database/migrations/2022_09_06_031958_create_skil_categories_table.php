@@ -13,18 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('skils', function (Blueprint $table) {
+        Schema::create('skil_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('skil_category_id')
-            ->nullable()
-            ->constrained()
-            ->onUpdate('cascade')
-            ->nullOnDelete();
+            $table->string('name');
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
@@ -35,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skils');
+        Schema::dropIfExists('skil_categories');
     }
 };

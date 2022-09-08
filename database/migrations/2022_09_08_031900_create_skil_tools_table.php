@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('work_tools', function (Blueprint $table) {
+        Schema::create('skil_tools', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('work_id')
+            $table->foreignId('skil_id')
             ->nullable()
             ->constrained()
             ->onUpdate('cascade')
@@ -25,9 +25,8 @@ return new class extends Migration
             // ->constrained()
             // ->onUpdate('cascade')
             // ->onDelete('cascade');
+            $table->tinyInteger('years_of_dev');
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_tools');
+        Schema::dropIfExists('skil_tools');
     }
 };

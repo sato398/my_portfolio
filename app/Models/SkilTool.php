@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Work;
+use App\Models\Skil;
 use App\Models\BaseTool;
 
-class WorkTool extends Model
+class SkilTool extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'work_id',
+        'skil_id',
         'base_tool_id',
+        'years_of_dev'
     ];
 
-    public function work()
+    public function skil()
     {
-        return $this->belongsTo(Work::class);
+        return $this->belongsTo(Skil::class);
     }
 
     public function tools()

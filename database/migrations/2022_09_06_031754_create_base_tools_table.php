@@ -21,6 +21,16 @@ return new class extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->nullOnDelete();
+            $table->foreignId('work_tool_id')
+            ->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->nullOnDelete();
+            $table->foreignId('skil_tool_id')
+            ->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->nullOnDelete();
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
