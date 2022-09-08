@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('skil_icons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('base_tool_id')
+            $table->foreignId('skil_tool_id')
             ->nullable()
             ->constrained()
             ->onUpdate('cascade')

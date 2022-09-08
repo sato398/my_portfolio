@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

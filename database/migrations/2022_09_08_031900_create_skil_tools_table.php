@@ -27,6 +27,7 @@ return new class extends Migration
             // ->onDelete('cascade');
             $table->tinyInteger('years_of_dev');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

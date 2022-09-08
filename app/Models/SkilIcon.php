@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Skil;
+use App\Models\SkilTool;
 
 class SkilIcon extends Model
 {
@@ -15,8 +15,8 @@ class SkilIcon extends Model
         'icon',
     ];
 
-    public function skil()
+    public function skilToll()
     {
-        return $this->belongsTo(Skil::class);
+        return $this->belongsTo(SkilTool::class);
     }
 }

@@ -18,4 +18,5 @@ Route::group([
     $router->resource('works', 'WorkController');
     $router->resource('work-categories', 'WorkCategoryController');
     $router->resource('skils', 'SkilController');
+    $router->resource('skil-categories', 'SkilCategoryController');
 });
