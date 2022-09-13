@@ -15,8 +15,14 @@ Route::group([
     $router->resource('base-tool-categories', 'BaseToolCategoryController');
     $router->resource('base-tools', 'BaseToolController');
     $router->resource('base-positions', 'BasePositionController');
+
     $router->resource('works', 'WorkController');
     $router->resource('work-categories', 'WorkCategoryController');
+    $router->resource('work-sort', 'WorkSortController', ['only' => ['index', 'store']]);
+    $router->resource('work-category-sort', 'WorkCategorySortController', ['only' => ['index', 'store']]);
+
     $router->resource('skils', 'SkilController');
     $router->resource('skil-categories', 'SkilCategoryController');
+    $router->resource('skil-sort', 'SkilSortController', ['only' => ['index', 'store']]);
+    $router->resource('skil-tool-sort', 'SkilToolSortController', ['only' => ['index', 'store']]);
 });

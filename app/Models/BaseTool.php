@@ -23,7 +23,7 @@ class BaseTool extends Model
 
     public function slilTool()
     {
-        return $this->belongsTo(Skil::class);
+        return $this->hasMany(Skil::class);
     }
 
     public function baseToolCategory()

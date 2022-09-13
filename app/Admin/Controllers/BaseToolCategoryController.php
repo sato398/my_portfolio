@@ -29,6 +29,7 @@ class BaseToolCategoryController extends AdminController
 
         // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
+        $grid->column('slug', 'スラッグ');
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
         })->sortable();
@@ -51,6 +52,7 @@ class BaseToolCategoryController extends AdminController
 
         // $show->field('id', __('Id'));
         $show->field('name',  'カテゴリー名');
+        $show->field('nslugame',  'スラッグ');
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
         });
@@ -71,6 +73,7 @@ class BaseToolCategoryController extends AdminController
         $form = new Form(new BaseToolCategory());
 
         $form->text('name', 'カテゴリー名');
+        $form->text('slug', 'スラッグ');
 
         return $form;
     }

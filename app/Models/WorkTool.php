@@ -21,8 +21,8 @@ class WorkTool extends Model
         return $this->belongsTo(Work::class);
     }
 
-    public function tools()
+    public function tool()
     {
-        return $this->hasMany(BaseTool::class);
+        return $this->belongsTo(BaseTool::class);
     }
 }

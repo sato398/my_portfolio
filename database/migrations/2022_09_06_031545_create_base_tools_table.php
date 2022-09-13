@@ -13,9 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('skil_categories', function (Blueprint $table) {
+        Schema::create('base_tools', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('base_tool_category_id')
+            ->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->nullOnDelete();
+            // $table->foreignId('work_tool_id')
+            // ->nullable()
+            // ->constrained()
+            // ->onUpdate('cascade')
+            // ->nullOnDelete();
+            // $table->foreignId('skil_tool_id')
+            // ->nullable()
+            // ->constrained()
+            // ->onUpdate('cascade')
+            // ->nullOnDelete();
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
@@ -30,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skil_categories');
+        Schema::dropIfExists('base_tools');
     }
 };

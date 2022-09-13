@@ -78,12 +78,13 @@ class BaseToolController extends AdminController
     {
         $form = new Form(new BaseTool());
 
-        $form->text('name', 'ツール名');
         $form->select('base_tool_category_id', 'カテゴリー')
         ->options(
             BaseToolCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
+        $form->text('name', 'ツール名');
+
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));
 

@@ -29,6 +29,7 @@ class WorkCategoryController extends AdminController
 
         // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
+        $grid->column('slug', 'スラッグ');
         $grid->column('sort', 'ソート順');
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
@@ -53,6 +54,7 @@ class WorkCategoryController extends AdminController
 
         // $show->field('id', __('Id'));
         $show->field('name', 'カテゴリー名');
+        $show->field('slug', 'スラッグ');
         $show->field('sort', 'ソート順');
         // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
@@ -75,6 +77,7 @@ class WorkCategoryController extends AdminController
         $form = new Form(new WorkCategory());
 
         $form->text('name', 'カテゴリー名');
+        $form->text('slug', 'スラッグ');
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));
 

@@ -11,6 +11,8 @@ use Carbon\Carbon;
 
 use App\Models\BaseToolCategory;
 use App\Models\BaseTool;
+use App\Models\SkilTool;
+use Encore\Admin\Widgets\Table;
 
 class SkilController extends AdminController
 {
@@ -28,17 +30,32 @@ class SkilController extends AdminController
      */
     protected function grid()
     {
+        $baseTools = BaseTool::all();
+
         $grid = new Grid(new Skil());
 
         // $grid->column('id', __('Id'));
-        $grid->column('base_category_id', 'カテゴリー名');
-        $grid->column('years_of_dev', '開発年数');
-        $grid->column('created_at', '作成日時')->display(function () {
-            return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
-        })->sortable();
-        $grid->column('updated_at', '更新日時')->display(function () {
-            return Carbon::parse($this->updated_at)->format('Y/m/d H:i:s');
-        })->sortable();
+        $grid->baseToolCategory()->name('カテゴリー名');
+        $grid->column('sort', 'ソート順');
+        $grid->column('items', 'ツール')->display(function(){
+            return '一覧';
+        })->expand(function() use($baseTools){
+            $items = $this->items;
+            $itemName = [];
+            $itemNameItem = [];
+
+            foreach ($items as $item) {
+                $itemNameItem[] = $baseTools->where('id', $item['base_tool_id'])->first()->name;
+                $itemNameItem[] = $item['years_of_dev'];
+                $itemNameItem[] = $item['icon'];
+                $itemNameItem[] = $item['sort'];
+                $itemNameItemWrap[] = $itemNameItem;
+                $itemNameItem = [];
+            }
+            $itemNameTable = new Table(['名前', '開発年数', 'アイコン', 'ソート順'], $itemNameItemWrap);
+            $itemName[] = [$itemNameTable];
+            return new Table(['ツール'], $itemName);
+        });
 
         return $grid;
     }
@@ -54,8 +71,7 @@ class SkilController extends AdminController
         $show = new Show(Skil::findOrFail($id));
 
         // $show->field('id', __('Id'));
-        $show->field('base_category_id', 'カテゴリー名');
-        $show->field('years_of_dev', '開発年数');
+        $show->field('base_tool_category_id', 'カテゴリー名');
         // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
@@ -76,12 +92,12 @@ class SkilController extends AdminController
     {
         $form = new Form(new Skil());
 
-        $form->select('base_category_id', 'カテゴリー名')
+        $form->select('base_tool_category_id', 'カテゴリー名')
         ->options(
             BaseToolCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
-        $form->hasMany('tools', 'ツール', function(Form\NestedForm $toolsForm) use($form){
+        $form->hasMany('items', 'ツール', function(Form\NestedForm $toolsForm) use($form){
             $toolsForm->select('base_tool_id', 'ツール名')
             ->options(
                   BaseTool::orderBy('sort', 'asc')->get()
@@ -89,13 +105,32 @@ class SkilController extends AdminController
             )->rules('required|exists:App\Models\BaseTool,id');
             $toolsForm->text('years_of_dev', '開発年数');
             $toolsForm->text('icon', 'アイコン');
-
-            // $toolsForm->saving(function($toolsForm) use($form){
-            //     $id = $form->input('id');
-            //     $toolsForm->skil_id = $id;
-            // });
         })->useTable();
+
+        if($form->isCreating()) {
+            $exist = false;
+            $form->saving(function($form) use(&$exist){
+                $category = $form->input('base_tool_category_id');
+                $skil = Skil::where('base_tool_category_id', $category)->first();
+                if(!isset($skil)) {
+                    $exist = false;
+                } else {
+                    foreach ($form->items as $key => $item) {
+                        SkilTool::updateOrcreate(
+                            ['skil_id' => $skil->id,'base_tool_id' => $item['base_tool_id']],
+                            ['years_of_dev' => $item['years_of_dev'], 'icon' => $item['icon']],
+                        );
+                    }
+                    $exist = true;
+                }
+
+                if($exist) {
+                    return redirect(config('admin.route.prefix') . '/skils');
+                }
+            });
+        }
 
         return $form;
     }
+
 }
