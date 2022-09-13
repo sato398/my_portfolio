@@ -14,6 +14,8 @@ use App\Models\BaseTool;
 use App\Models\SkilTool;
 use Encore\Admin\Widgets\Table;
 
+use App\Services\Skil\SkilDevYearsEnum;
+
 class SkilController extends AdminController
 {
     /**
@@ -46,8 +48,8 @@ class SkilController extends AdminController
 
             foreach ($items as $item) {
                 $itemNameItem[] = $baseTools->where('id', $item['base_tool_id'])->first()->name;
-                $itemNameItem[] = $item['years_of_dev'];
-                $itemNameItem[] = $item['icon'];
+                $itemNameItem[] = SkilDevYearsEnum::getDescription($item['years_of_dev']);
+                $itemNameItem[] = "<i class=\"{$item['icon']}\"></i>";
                 $itemNameItem[] = $item['sort'];
                 $itemNameItemWrap[] = $itemNameItem;
                 $itemNameItem = [];
@@ -90,6 +92,12 @@ class SkilController extends AdminController
      */
     protected function form()
     {
+        $values = SkilDevYearsEnum::getValues();
+        $devEnums = [];
+        foreach ($values as $key => $value) {
+            $devEnums[$value] = SkilDevYearsEnum::getDescription($value);
+        }
+
         $form = new Form(new Skil());
 
         $form->select('base_tool_category_id', 'カテゴリー名')
@@ -97,14 +105,17 @@ class SkilController extends AdminController
             BaseToolCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
-        $form->hasMany('items', 'ツール', function(Form\NestedForm $toolsForm) use($form){
+        $form->hasMany('items', 'ツール', function(Form\NestedForm $toolsForm) use($form, $devEnums){
             $toolsForm->select('base_tool_id', 'ツール名')
             ->options(
                   BaseTool::orderBy('sort', 'asc')->get()
                 ->pluck('name', 'id')
             )->rules('required|exists:App\Models\BaseTool,id');
-            $toolsForm->text('years_of_dev', '開発年数');
-            $toolsForm->text('icon', 'アイコン');
+            $toolsForm->select('years_of_dev', '開発年数')
+            ->options(
+                $devEnums
+            )->rules('required');
+            $toolsForm->icon('icon', 'アイコン');
         })->useTable();
 
         if($form->isCreating()) {
