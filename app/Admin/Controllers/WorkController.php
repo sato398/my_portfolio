@@ -11,7 +11,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Models\BaseTool;
 use App\Models\BasePosition;
+use App\Models\BaseToolVersion;
 use Illuminate\Support\Facades\Storage;
+use App\Admin\Selectable\BaseTools;
+use App\Admin\Selectable\BasePositions;
 
 use App\Models\WorkCategory;
 
@@ -104,21 +107,33 @@ class WorkController extends AdminController
             //     'off' => ['value' => (string) 0, 'text' => 'しない', 'color' => 'danger'],
             // ])->default('on');
         });
-
         $form->hasMany('workTools', 'ツール', function(Form\NestedForm $toolsForm){
+            // dd($toolsForm);
             $toolsForm->select('base_tool_id', 'ツール名')
             ->options(
                   BaseTool::orderBy('sort', 'asc')->get()
                 ->pluck('name', 'id')
             )->rules('required|exists:App\Models\BaseTool,id');
-        });
+            // $toolsForm->hasMany('workToolVersions', function(Form\NestedForm $versionsForm) {
+            //     $versionsForm->text('バージョン');
+            // });
+        })->useTable();
+        // $form->belongsToMany('baseTools', BaseTools::class, 'ツール名');
 
-        $form->hasMany('workPositions', '担当', function(Form\NestedForm $positionsForm){
-            $positionsForm->select('base_position_id', '担当箇所')
-            ->options(
-                  BasePosition::orderBy('sort', 'asc')->get()
-                ->pluck('name', 'id')
-            )->rules('required|exists:App\Models\BasePosition,id');
+        // $form->hasMany('workPositions', '担当', function(Form\NestedForm $positionsForm){
+        //     $positionsForm->select('base_position_id', '担当箇所')
+        //     ->options(
+        //           BasePosition::orderBy('sort', 'asc')->get()
+        //         ->pluck('name', 'id')
+        //     )->rules('required|exists:App\Models\BasePosition,id');
+        // })->useTable();
+        $form->belongsToMany('basePositions', BasePositions::class, '担当箇所');
+
+        $form->saving(function($form){
+            $slug = $form->input('slug');
+            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::lower($slug);
+            $form->input('slug', $slug);
         });
 
         $form->saved(function (Form $form) {

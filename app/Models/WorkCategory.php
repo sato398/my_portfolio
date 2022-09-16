@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Work;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+//理論削除のonDeleteのライブラリ
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class WorkCategory extends Model
 {
-    use HasFactory, AdminBuilder, ModelTree;
+    use HasFactory, AdminBuilder, ModelTree, SoftDeletes, SoftCascadeTrait;
+
+    protected $softCascade = ['works']; //理論削除のカスケード
 
     protected $fillable = [
         'name',

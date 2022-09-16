@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Work;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WorkImage extends Model
+class BasePositionWork extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'work_id',
-        'path',
+        'base_position_id',
     ];
-
-    public function work()
-    {
-        return $this->belongsTo(Work::class);
-    }
 }

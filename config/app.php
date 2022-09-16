@@ -195,6 +195,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * add
+         */
+        App\Providers\LaravelAdminServiceProvider::class,
+
     ],
 
     /*

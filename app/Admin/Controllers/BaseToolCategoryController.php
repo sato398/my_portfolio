@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class BaseToolCategoryController extends AdminController
 {
@@ -74,6 +75,13 @@ class BaseToolCategoryController extends AdminController
 
         $form->text('name', 'カテゴリー名');
         $form->text('slug', 'スラッグ');
+
+        $form->saving(function($form){
+            $slug = $form->input('slug');
+            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::lower($slug);
+            $form->input('slug', $slug);
+        });
 
         return $form;
     }

@@ -7,13 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\WorkCategory;
 use App\Models\WorkPosition;
 use App\Models\WorkTool;
+use App\Models\BaseTool;
+use App\Models\WorkToolVersion;
 use App\Models\WorkImage;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+//理論削除のonDeleteのライブラリ
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Work extends Model
 {
-    use HasFactory, ModelTree, AdminBuilder;
+    use HasFactory, ModelTree, AdminBuilder, SoftDeletes, SoftCascadeTrait;
+
+    protected $softCascade = ['workImages', 'workTools', 'workPositions']; //理論削除のカスケード
 
     protected $fillable = [
         'title',
@@ -36,14 +44,26 @@ class Work extends Model
 
     public function workTools()
     {
+        // return $this->hasManyThrough(
+        //     WorkToolVersion::class,
+        //     WorkTool::class,
+        //     'work_id',
+        //     'work_tool_id',
+        //     'id',
+        //     'id'
+        // );
         return $this->hasMany(WorkTool::class);
     }
 
-    public function workPositions()
+    public function baseTools()
     {
-        return $this->hasMany(WorkPosition::class);
+        return $this->belongsToMany(BaseTool::class);
     }
 
+    public function basePositions()
+    {
+        return $this->belongsToMany(BasePosition::class);
+    }
 
     public function __construct(array $attributes = [])
     {

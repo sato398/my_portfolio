@@ -8,7 +8,7 @@ use App\Models\BaseToolCategory;
 
 class BaseToolCategorySeeder extends Seeder
 {
-    protected const LEVEL_ITEMS = [
+    protected const ITEMS = [
         ['name' => '言語', 'slug' => 'language'],
         ['name' => 'フレームワーク', 'slug' => 'framework'],
         ['name' => 'ツール', 'slug' => 'tools'],
@@ -22,7 +22,7 @@ class BaseToolCategorySeeder extends Seeder
     public function run()
     {
         // Level::truncate();
-        foreach (self::LEVEL_ITEMS as $item) {
+        foreach (self::ITEMS as $item) {
             BaseToolCategory::firstOrCreate($item, $item);
         }
     }

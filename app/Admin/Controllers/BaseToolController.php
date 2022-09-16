@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 use App\Models\BaseToolCategory;
 
@@ -27,11 +28,16 @@ class BaseToolController extends AdminController
      */
     protected function grid()
     {
+        $baseToolCatogories = BaseToolCategory::all();
+
         $grid = new Grid(new BaseTool());
 
         // $grid->column('id', __('Id'));
         $grid->column('name', 'ツール名');
-        $grid->column('base_tool_category_id', 'カテゴリー');
+        $grid->column('slug', 'スラッグ');
+        $grid->column('base_tool_category_id', 'カテゴリー')->display(function() use($baseToolCatogories){
+            return $baseToolCatogories->where('id', $this->base_tool_category_id)->first()->name;
+        });
         $grid->column('sort', 'ソート番号');
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
@@ -56,6 +62,7 @@ class BaseToolController extends AdminController
 
         // $show->field('id', __('Id'));
         $show->field('name', 'ツール名');
+        $show->field('slug', 'スラッグ');
         $show->field('base_tool_category_id', 'カテゴリー名');
         $show->field('sort', 'ソート番号');
         // $show->field('parent_id', __('Parent id'));
@@ -84,6 +91,17 @@ class BaseToolController extends AdminController
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
         $form->text('name', 'ツール名');
+        $form->text('slug', 'スラッグ');
+        $form->hasMany('baseToolVersions', 'バージョン', function(Form\NestedForm $versionsForm) {
+            $versionsForm->text('version', 'バージョン');
+        })->useTable();
+
+        $form->saving(function($form){
+            $slug = $form->input('slug');
+            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::lower($slug);
+            $form->input('slug', $slug);
+        });
 
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));

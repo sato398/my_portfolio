@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('base_tools', function (Blueprint $table) {
+        Schema::create('work_tool_versions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->foreignId('base_tool_category_id')
+            $table->foreignId('work_tool_id')
             ->nullable()
             ->constrained()
             ->onUpdate('cascade')
-            ->nullOnDelete();
+            ->onDelete('cascade');
+            $table->foreignId('base_tool_version_id')
+            ->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
@@ -36,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('base_tools');
+        Schema::dropIfExists('work_tool_versions');
     }
 };

@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             AdminUserSeeder::class,
             BaseToolCategorySeeder::class,
+            BasePositionSeeder::class,
+            BaseToolSeeder::class,
+            SkilSeeder::class,
+            SkilToolSeeder::class,
+            WorkCategorySeeder::class,
+            BaseToolVersionSeeder::class,
         ]);
     }
 }

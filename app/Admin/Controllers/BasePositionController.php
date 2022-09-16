@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class BasePositionController extends AdminController
 {
@@ -75,8 +76,16 @@ class BasePositionController extends AdminController
         $form = new Form(new BasePosition());
 
         $form->text('name', '担当範囲名');
+        $form->text('slug', 'スラッグ');
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));
+
+        $form->saving(function($form){
+            $slug = $form->input('slug');
+            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::lower($slug);
+            $form->input('slug', $slug);
+        });
 
         return $form;
     }

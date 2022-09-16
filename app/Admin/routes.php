@@ -15,6 +15,7 @@ Route::group([
     $router->resource('base-tool-categories', 'BaseToolCategoryController');
     $router->resource('base-tools', 'BaseToolController');
     $router->resource('base-positions', 'BasePositionController');
+    $router->resource('base-tool-version-sort', 'BaseToolVersionSortController');
 
     $router->resource('works', 'WorkController');
     $router->resource('work-categories', 'WorkCategoryController');

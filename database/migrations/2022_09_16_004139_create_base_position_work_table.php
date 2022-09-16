@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('base_tools', function (Blueprint $table) {
+        Schema::create('base_position_work', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->foreignId('base_tool_category_id')
+            $table->foreignId('work_id')
             ->nullable()
             ->constrained()
             ->onUpdate('cascade')
-            ->nullOnDelete();
-            $table->unsignedInteger('sort')->nullable();
-            $table->integer('parent_id')->nullable();
+            ->onDelete('cascade');
+            $table->foreignId('base_position_id')
+            ->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('base_tools');
+        Schema::dropIfExists('base_position_work');
     }
 };

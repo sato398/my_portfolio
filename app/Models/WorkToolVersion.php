@@ -4,33 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Skil;
-use App\Models\BaseTool;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\WorkTool;
+use App\Models\BaseToolVersion;
 
-class SkilTool extends Model
+class WorkToolVersion extends Model
 {
-    use HasFactory, ModelTree, AdminBuilder, SoftDeletes;
+    use HasFactory, AdminBuilder, ModelTree, SoftDeletes;
 
     protected $fillable = [
-        'skil_id',
-        'base_tool_id',
-        'years_of_dev',
-        'icon',
+        'work_tool_id',
+        'base_tool_version_id',
         'sort',
         'parent_id',
     ];
 
-    public function skil()
+    public function workTool()
     {
-        return $this->belongsTo(Skil::class);
+        return $this->belongsTo(WorkTool::class);
     }
 
-    public function tool()
+    public function baseToolVersion()
     {
-        return $this->belongsTo(BaseTool::class);
+        return $this->belongsTo(BaseToolVersion::class);
     }
 
     public function __construct(array $attributes = [])
@@ -39,6 +37,6 @@ class SkilTool extends Model
 
         $this->setParentColumn('parent_id');
         $this->setOrderColumn('sort');
-        $this->setTitleColumn('base_tool_id');
+        $this->setTitleColumn('work_tool_id');
     }
 }

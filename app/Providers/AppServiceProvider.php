@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Encore\Admin\Form\NestedForm as NestedFormOrigin;
+use App\Admin\Extensions\Form\NestedForm;
 
 class AppServiceProvider extends ServiceProvider
 {

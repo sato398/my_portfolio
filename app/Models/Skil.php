@@ -8,10 +8,16 @@ use App\Models\SkilTool;
 use App\Models\BaseToolCategory;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+//理論削除のonDeleteのライブラリ
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Skil extends Model
 {
-    use HasFactory, ModelTree, AdminBuilder;
+    use HasFactory, ModelTree, AdminBuilder, SoftDeletes, SoftCascadeTrait;
+
+    protected $softCascade = ['items']; //理論削除のカスケード
 
     protected $fillable = [
         'base_tool_category_id',

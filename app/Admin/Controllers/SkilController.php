@@ -16,6 +16,8 @@ use Encore\Admin\Widgets\Table;
 
 use App\Services\Skil\SkilDevYearsEnum;
 
+use Illuminate\Support\Str;
+
 class SkilController extends AdminController
 {
     /**
@@ -121,6 +123,11 @@ class SkilController extends AdminController
         if($form->isCreating()) {
             $exist = false;
             $form->saving(function($form) use(&$exist){
+                $slug = $form->input('slug');
+                $slug = str_replace(' ', '-', $slug);
+                $slug = Str::lower($slug);
+                $form->input('slug', $slug);
+
                 $category = $form->input('base_tool_category_id');
                 $skil = Skil::where('base_tool_category_id', $category)->first();
                 if(!isset($skil)) {
@@ -140,6 +147,13 @@ class SkilController extends AdminController
                 }
             });
         }
+
+        $form->saving(function($form){
+            $slug = $form->input('slug');
+            $slug = str_replace(' ', '-', $slug);
+            $slug = Str::lower($slug);
+            $form->input('slug', $slug);
+        });
 
         return $form;
     }

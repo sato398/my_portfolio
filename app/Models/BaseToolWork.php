@@ -10,7 +10,7 @@ use App\Models\BaseToolVersion;
 use App\Models\WorkToolVersion;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WorkTool extends Model
+class BaseToolWork extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,16 +18,6 @@ class WorkTool extends Model
         'work_id',
         'base_tool_id',
     ];
-
-    public function work()
-    {
-        return $this->belongsTo(Work::class);
-    }
-
-    public function baseTool()
-    {
-        return $this->belongsTo(BaseTool::class);
-    }
 
     public function baseToolVersions()
     {
