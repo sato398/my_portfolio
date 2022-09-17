@@ -19,6 +19,7 @@ class MenuSeeder extends Seeder
         ['title' => 'ワーク', 'parent_id' => 0,'order' => 9, 'icon' => 'fa-sort-amount-desc', 'uri' => 'works'],
         ['title' => 'ワークカテゴリーソート', 'parent_id' => 0,'order' => 10, 'icon' => 'fa-sort-amount-desc', 'uri' => 'work-category-sort'],
         ['title' => 'ワークソート', 'parent_id' => 0,'order' => 11, 'icon' => 'fa-sort-amount-desc', 'uri' => 'work-sort'],
+        ['title' => 'ワークイメージソート', 'parent_id' => 0,'order' => 12, 'icon' => 'fa-sort-amount-desc', 'uri' => 'work-image-sort'],
     ];
 
     /**
