@@ -21,6 +21,9 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('path');
+            $table->tinyInteger('type');
+            $table->unsignedInteger('sort')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,6 +19,8 @@ use App\Admin\Selectable\BasePositions;
 
 use App\Models\WorkCategory;
 
+use App\Services\Work\WorkImageTypeEnum;
+
 class WorkController extends AdminController
 {
     /**
@@ -70,6 +72,20 @@ class WorkController extends AdminController
         $show->field('explanation', '説明')->as(function ($content) {
             return "{$content}";
         });
+        $show->workImages('画像', function($images){
+            $images->resource('/admin/images');
+
+            $images->disableCreateButton();
+            $images->disableExport();
+
+            // $images->id();
+            $images->type('ツール')->display(function($type){
+                return WorkImageTypeEnum::getDescription($type);
+            });
+            $images->path('画像')->image();
+
+            $images->sort('ソート順');
+        });
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
         });
@@ -87,6 +103,12 @@ class WorkController extends AdminController
      */
     protected function form()
     {
+        $values = WorkImageTypeEnum::getValues();
+        $typeEnums = [];
+        foreach ($values as $key => $value) {
+            $typeEnums[$value] = WorkImageTypeEnum::getDescription($value);
+        }
+
         $form = new Form(new Work());
 
         $form->text('title', 'タイトル');
@@ -98,41 +120,17 @@ class WorkController extends AdminController
         )->rules('required|exists:App\Models\WorkCategory,id');
         $form->ckeditor('explanation', '説明');
 
-        $form->hasMany('workImages', '画像', function(Form\NestedForm $imagesForm){
+        $form->hasMany('workImages', '画像', function(Form\NestedForm $imagesForm) use($typeEnums){
             $imagesForm->image('path', '画像')->move('/tmp', function ($file){ //item_image
                 return (string) Str::uuid() . '.' . $file->guessExtension();
             });
-
-            // $imagesForm->switch('cover', '正方形トリミング')->states([
-            //     'on'  => ['value' => (string) 1, 'text' => 'する', 'color' => 'success'],
-            //     'off' => ['value' => (string) 0, 'text' => 'しない', 'color' => 'danger'],
-            // ])->default('on');
+            $imagesForm->select('type', '画像タイプ')
+            ->options(
+                $typeEnums
+            )->rules('required');
         });
-        // $form->hasMany('workTools', 'ツール', function(Form\NestedForm $toolsForm){
-
-        //     $toolsForm->select('base_tool_id', 'ツール名')
-        //     ->options(
-        //         BaseTool::orderBy('sort', 'asc')->get()
-        //         ->pluck('name', 'id')
-        //     )->rules('required|exists:App\Models\BaseTool,id');
-
-        //     $toolsForm->select('base_tool_version_id', 'バージョン')
-        //     ->options(
-        //         BaseToolVersion::orderBy('sort', 'asc')
-        //         ->when()
-        //         ->get()
-        //         ->pluck('version', 'id')
-        //     )->rules('required|exists:App\Models\BaseToolVersion,id');
-        // })->useTable();
         $form->belongsToMany('baseTools', BaseTools::class, 'ツール名');
 
-        // $form->hasMany('workPositions', '担当', function(Form\NestedForm $positionsForm){
-        //     $positionsForm->select('base_position_id', '担当箇所')
-        //     ->options(
-        //           BasePosition::orderBy('sort', 'asc')->get()
-        //         ->pluck('name', 'id')
-        //     )->rules('required|exists:App\Models\BasePosition,id');
-        // })->useTable();
         $form->belongsToMany('basePositions', BasePositions::class, '担当箇所');
 
         $form->saving(function($form){
