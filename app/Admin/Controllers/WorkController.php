@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\Work;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
+use App\Admin\Extensions\Form as CustomForm;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
@@ -107,18 +108,23 @@ class WorkController extends AdminController
             //     'off' => ['value' => (string) 0, 'text' => 'しない', 'color' => 'danger'],
             // ])->default('on');
         });
-        $form->hasMany('workTools', 'ツール', function(Form\NestedForm $toolsForm){
-            // dd($toolsForm);
-            $toolsForm->select('base_tool_id', 'ツール名')
-            ->options(
-                  BaseTool::orderBy('sort', 'asc')->get()
-                ->pluck('name', 'id')
-            )->rules('required|exists:App\Models\BaseTool,id');
-            // $toolsForm->hasMany('workToolVersions', function(Form\NestedForm $versionsForm) {
-            //     $versionsForm->text('バージョン');
-            // });
-        })->useTable();
-        // $form->belongsToMany('baseTools', BaseTools::class, 'ツール名');
+        // $form->hasMany('workTools', 'ツール', function(Form\NestedForm $toolsForm){
+
+        //     $toolsForm->select('base_tool_id', 'ツール名')
+        //     ->options(
+        //         BaseTool::orderBy('sort', 'asc')->get()
+        //         ->pluck('name', 'id')
+        //     )->rules('required|exists:App\Models\BaseTool,id');
+
+        //     $toolsForm->select('base_tool_version_id', 'バージョン')
+        //     ->options(
+        //         BaseToolVersion::orderBy('sort', 'asc')
+        //         ->when()
+        //         ->get()
+        //         ->pluck('version', 'id')
+        //     )->rules('required|exists:App\Models\BaseToolVersion,id');
+        // })->useTable();
+        $form->belongsToMany('baseTools', BaseTools::class, 'ツール名');
 
         // $form->hasMany('workPositions', '担当', function(Form\NestedForm $positionsForm){
         //     $positionsForm->select('base_position_id', '担当箇所')

@@ -20,10 +20,10 @@ class LaravelAdminServiceProvider extends ServiceProvider
         //     'App\\Admin\\Extensions\\Form\\Builder'
         // );
 
-        // $this->app->bind(
-        //     'Encore\\Admin\\Form\\NestedForm',
-        //     'App\\Admin\\Extensions\\Form\\NestedForm'
-        // );
+        $this->app->bind(
+            'Encore\\Admin\\Form\\NestedForm',
+            'App\\Admin\\Extensions\\Form\\NestedForm'
+        );
 
         // $this->app->bind(
         //     'Encore\\Admin\\Form\\Field\\HasMany',
