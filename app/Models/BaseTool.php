@@ -8,15 +8,15 @@ use App\Models\WorkTool;
 use App\Models\BaseToolCategory;
 use App\Models\Skil;
 use App\Models\BaseToolVersion;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 //理論削除のonDeleteのライブラリ
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class BaseTool extends Model
 {
-    use HasFactory, SoftDeletes, SoftCascadeTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use SoftCascadeTrait;
 
     protected $softCascade = ['workTools', 'slilTools', 'baseToolVersions']; //理論削除のカスケード
 
@@ -39,5 +39,4 @@ class BaseTool extends Model
     {
         return $this->belongsTo(BaseToolCategory::class);
     }
-
 }

@@ -9,8 +9,8 @@ use App\Models\WorkCategory;
 class WorkCategorySeeder extends Seeder
 {
     protected const ITEMS = [
-        ['name' => 'アプリケーション', 'slug' => 'application'],
-        ['name' => 'コーディング', 'slug' => 'coding'],
+        ['name' => 'アプリケーション', 'name_en' => 'Web Application', 'slug' => 'application'],
+        ['name' => 'コーディング', 'name_en' => 'Coding', 'slug' => 'coding'],
     ];
 
     /**

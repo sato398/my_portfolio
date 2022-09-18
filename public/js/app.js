@@ -2473,7 +2473,10 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/site/bootstrap.js");
+/* harmony import */ var _stylish_portfolio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stylish-portfolio */ "./resources/js/site/stylish-portfolio.js");
+/* harmony import */ var _stylish_portfolio__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_stylish_portfolio__WEBPACK_IMPORTED_MODULE_1__);
 
+ // import './bootstrap_w.min';
 
 /***/ }),
 
@@ -2517,6 +2520,141 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.MIX_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+/***/ }),
+
+/***/ "./resources/js/site/stylish-portfolio.js":
+/*!************************************************!*\
+  !*** ./resources/js/site/stylish-portfolio.js ***!
+  \************************************************/
+/***/ (() => {
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+(function () {
+  "use strict"; // Start of use strict
+
+  var menuToggle = document.querySelector('.menu-toggle');
+  var sidebar = document.querySelector('#sidebar-wrapper');
+
+  if (menuToggle) {
+    // Closes the sidebar menu
+    menuToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      var icon = menuToggle.querySelector('.fa-bars, .fa-times');
+
+      if (icon) {
+        if (icon.classList.contains('fa-times')) {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        } else if (icon.classList.contains('fa-bars')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        }
+      }
+    });
+  }
+
+  var navbarCollapse = document.querySelector('.navbar-collapse');
+
+  if (navbarCollapse) {
+    var navbarItems = navbarCollapse.querySelectorAll('a'); // Closes responsive menu when a scroll trigger link is clicked
+
+    var _iterator = _createForOfIteratorHelper(navbarItems),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var item = _step.value;
+        item.addEventListener('click', function (event) {
+          sidebar.classList.remove('active');
+          menuToggle.classList.remove('active');
+          var icon = menuToggle.querySelector('.fa-bars, .fa-times');
+
+          if (icon) {
+            if (icon.classList.contains('fa-times')) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            } else if (icon.classList.contains('fa-bars')) {
+              icon.classList.remove('fa-bars');
+              icon.classList.add('fa-times');
+            }
+          }
+        });
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  } // Scroll to top button appear
+
+
+  var scrollToTop = document.querySelector('.scroll-to-top');
+
+  if (scrollToTop) {
+    // Scroll to top button appear
+    window.addEventListener('scroll', function () {
+      var scrollDistance = window.pageYOffset;
+
+      if (scrollDistance > 100) {
+        scrollToTop.style.display = 'block';
+      } else {
+        scrollToTop.style.display = 'none';
+      }
+    });
+  }
+})(); // End of use strict
+// Disable Google Maps scrolling
+// See http://stackoverflow.com/a/25904582/1607849
+// Disable scroll zooming and bind back the click event
+
+
+var onMapMouseleaveHandler = function onMapMouseleaveHandler(e) {
+  this.addEventListener('click', onMapClickHandler);
+  this.removeEventListener('mouseleave', onMapMouseleaveHandler);
+  var iframe = this.querySelector('iframe');
+
+  if (iframe) {
+    iframe.style.pointerEvents = 'none';
+  }
+};
+
+var onMapClickHandler = function onMapClickHandler(e) {
+  // Disable the click handler until the user leaves the map area
+  this.removeEventListener('click', onMapClickHandler); // Handle the mouse leave event
+
+  this.addEventListener('mouseleave', onMapMouseleaveHandler); // Enable scrolling zoom
+
+  var iframe = this.querySelector('iframe');
+
+  if (iframe) {
+    iframe.style.pointerEvents = 'auto';
+  }
+};
+
+var maps = document.querySelectorAll('.map');
+
+var _iterator2 = _createForOfIteratorHelper(maps),
+    _step2;
+
+try {
+  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+    var map = _step2.value;
+    // Enable map zooming with mouse scroll when the user clicks the map
+    map.addEventListener('click', onMapClickHandler);
+  }
+} catch (err) {
+  _iterator2.e(err);
+} finally {
+  _iterator2.f();
+}
 
 /***/ }),
 
@@ -21816,6 +21954,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/Navbar-Right-Links-icons.css":
+/*!****************************************************!*\
+  !*** ./resources/css/Navbar-Right-Links-icons.css ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/bootstrap.min.css":
+/*!*****************************************!*\
+  !*** ./resources/css/bootstrap.min.css ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -22196,7 +22360,9 @@ process.umask = function() { return 0; };
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/site/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/site/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/site/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/Navbar-Right-Links-icons.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/bootstrap.min.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

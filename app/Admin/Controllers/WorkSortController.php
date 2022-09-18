@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Work;
-
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
@@ -20,11 +19,11 @@ class WorkSortController extends Controller
     {
         $works = Work::with('workCategory')->get();
 
-        return Admin::content(function (Content $content) use($works){
+        return Admin::content(function (Content $content) use ($works) {
             $content->header('実績の並び順');
-            $content->body(Work::tree(function ($tree) use($works){
+            $content->body(Work::tree(function ($tree) use ($works) {
                 $tree->disableCreate();
-                $tree->branch(function ($branch) use($works){
+                $tree->branch(function ($branch) use ($works) {
                     $category = $works->where('id', $branch['work_category_id'])->first()->workCategory->name;
                     $name = $branch['title'];
                     return "カテゴリー：{$category} / タイトル：{$name}";
@@ -41,7 +40,6 @@ class WorkSortController extends Controller
     protected function form()
     {
         return Admin::form(Work::class, function (Form $form) {
-
         });
     }
 }

@@ -1,0 +1,38 @@
+.portfolio-detail-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+
+  .portfolio-detail-image-wrap {
+    position: relative;
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .portfolio-detail-image-wrap::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+  }
+
+  .portfolio-detail-head-wrap{
+    @include sx {
+        padding-top: 2.5rem;
+        padding-bottom: 1rem;
+    }
+
+    @include lg {
+        padding-top: 5rem;
+        padding-bottom: 0.5rem;
+    }
+  }
+
+  .portfolio-detail-head{
+    font-family: 'rhythm-one', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }

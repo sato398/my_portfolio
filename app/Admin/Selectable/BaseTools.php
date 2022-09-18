@@ -18,7 +18,7 @@ class BaseTools extends Selectable
         // $this->column('id', __('Id'));
         $this->column('name', 'ツール名');
         $this->column('slug', 'スラッグ');
-        $this->column('base_tool_category_id', 'カテゴリー')->display(function() use($baseToolCatogories){
+        $this->column('base_tool_category_id', 'カテゴリー')->display(function () use ($baseToolCatogories) {
             return $baseToolCatogories->where('id', $this->base_tool_category_id)->first()->name;
         });
         // $this->column('sort', 'ソート番号');

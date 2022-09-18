@@ -12,7 +12,10 @@ use Encore\Admin\Traits\ModelTree;
 
 class BaseToolVersion extends Model
 {
-    use HasFactory, SoftDeletes, AdminBuilder, ModelTree;
+    use HasFactory;
+    use SoftDeletes;
+    use AdminBuilder;
+    use ModelTree;
 
     protected $fillable = [
         'base_tool_id',

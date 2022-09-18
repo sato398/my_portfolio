@@ -448,7 +448,7 @@ class NestedForm extends NestedFormOrigin
             $column = Arr::get($arguments, 0, '');
 
             /* @var Field $field */
-            if($method === 'hasMany') {
+            if ($method === 'hasMany') {
                 $field = new NestedFormHasMany($column, array_slice($arguments, 1));
             } else {
                 $field = new $className($column, array_slice($arguments, 1));

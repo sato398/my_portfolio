@@ -12,7 +12,10 @@ use App\Models\BaseToolVersion;
 
 class WorkToolVersion extends Model
 {
-    use HasFactory, AdminBuilder, ModelTree, SoftDeletes;
+    use HasFactory;
+    use AdminBuilder;
+    use ModelTree;
+    use SoftDeletes;
 
     protected $fillable = [
         'work_tool_id',

@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\WorkPosition;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 //理論削除のonDeleteのライブラリ
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class BasePosition extends Model
 {
-    use HasFactory, SoftDeletes, SoftCascadeTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use SoftCascadeTrait;
+
     /**
      * 理論削除のonDeleteのライブラリ
      *

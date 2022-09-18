@@ -80,7 +80,7 @@ class BasePositionController extends AdminController
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));
 
-        $form->saving(function($form){
+        $form->saving(function ($form) {
             $slug = $form->input('slug');
             $slug = str_replace(' ', '-', $slug);
             $slug = Str::lower($slug);

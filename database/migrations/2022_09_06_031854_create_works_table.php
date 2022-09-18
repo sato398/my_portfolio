@@ -27,7 +27,6 @@ return new class extends Migration
             $table->integer('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

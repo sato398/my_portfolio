@@ -8,14 +8,11 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
-
 use App\Models\BaseToolCategory;
 use App\Models\BaseTool;
 use App\Models\SkilTool;
 use Encore\Admin\Widgets\Table;
-
 use App\Services\Skil\SkilDevYearsEnum;
-
 use Illuminate\Support\Str;
 
 class SkilController extends AdminController
@@ -41,9 +38,9 @@ class SkilController extends AdminController
         // $grid->column('id', __('Id'));
         $grid->baseToolCategory()->name('カテゴリー名');
         $grid->column('sort', 'ソート順');
-        $grid->column('items', 'ツール')->display(function(){
+        $grid->column('items', 'ツール')->display(function () {
             return '一覧';
-        })->expand(function() use($baseTools){
+        })->expand(function () use ($baseTools) {
             $items = $this->items;
             $itemName = [];
             $itemNameItem = [];
@@ -107,10 +104,10 @@ class SkilController extends AdminController
             BaseToolCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
-        $form->hasMany('items', 'ツール', function(Form\NestedForm $toolsForm) use($form, $devEnums){
+        $form->hasMany('items', 'ツール', function (Form\NestedForm $toolsForm) use ($form, $devEnums) {
             $toolsForm->select('base_tool_id', 'ツール名')
             ->options(
-                  BaseTool::orderBy('sort', 'asc')->get()
+                BaseTool::orderBy('sort', 'asc')->get()
                 ->pluck('name', 'id')
             )->rules('required|exists:App\Models\BaseTool,id');
             $toolsForm->select('years_of_dev', '開発年数')
@@ -120,9 +117,9 @@ class SkilController extends AdminController
             $toolsForm->icon('icon', 'アイコン');
         })->useTable();
 
-        if($form->isCreating()) {
+        if ($form->isCreating()) {
             $exist = false;
-            $form->saving(function($form) use(&$exist){
+            $form->saving(function ($form) use (&$exist) {
                 $slug = $form->input('slug');
                 $slug = str_replace(' ', '-', $slug);
                 $slug = Str::lower($slug);
@@ -130,7 +127,7 @@ class SkilController extends AdminController
 
                 $category = $form->input('base_tool_category_id');
                 $skil = Skil::where('base_tool_category_id', $category)->first();
-                if(!isset($skil)) {
+                if (!isset($skil)) {
                     $exist = false;
                 } else {
                     foreach ($form->items as $key => $item) {
@@ -142,13 +139,13 @@ class SkilController extends AdminController
                     $exist = true;
                 }
 
-                if($exist) {
+                if ($exist) {
                     return redirect(config('admin.route.prefix') . '/skils');
                 }
             });
         }
 
-        $form->saving(function($form){
+        $form->saving(function ($form) {
             $slug = $form->input('slug');
             $slug = str_replace(' ', '-', $slug);
             $slug = Str::lower($slug);
@@ -157,5 +154,4 @@ class SkilController extends AdminController
 
         return $form;
     }
-
 }

@@ -9,9 +9,9 @@ use App\Models\BaseToolCategory;
 class BaseToolCategorySeeder extends Seeder
 {
     protected const ITEMS = [
-        ['name' => '言語', 'slug' => 'language'],
-        ['name' => 'フレームワーク', 'slug' => 'framework'],
-        ['name' => 'ツール', 'slug' => 'tools'],
+        ['name' => '言語', 'name_en' => 'language', 'slug' => 'language'],
+        ['name' => 'フレームワーク', 'name_en' => 'framework', 'slug' => 'framework'],
+        ['name' => 'ツール', 'name_en' => 'tools', 'slug' => 'tools'],
     ];
 
     /**

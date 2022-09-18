@@ -21,9 +21,17 @@ Route::get('/skils', function () {
     return view('skil');
 })->name('skil');
 
-Route::get('/works', function () {
-    return view('work');
-})->name('work');
+Route::group([
+    'prefix' => 'works',
+], function () {
+    Route::get('/', function () {
+        return view('work');
+    })->name('work');
+
+    Route::get('/{workSlug}', function () {
+        return view('work_item');
+    })->name('work.item');
+});
 
 Route::get('/about', function () {
     return view('about');
