@@ -15,6 +15,10 @@
     }
 }
 
+.portfolio-item{
+    display: inline-block;
+}
+
 .portfolio-item-head-wrap{
     @include sx {
         padding-top: 2.5rem;
@@ -31,4 +35,8 @@
     font-family: 'rhythm-one', sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.portfolio-item-caption-content-title{
+    text-transform: none !important;
 }

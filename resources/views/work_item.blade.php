@@ -2,8 +2,8 @@
 
     <x-slot name="content">
 
-        {{-- @livewire('site.parts.workItem') --}}
-        <x-site.parts.workItem.work_item />
+        @livewire('site.parts.work.item.work-item')
+        {{-- <x-site.parts.work.item.item /> --}}
 
     </x-slot>
 

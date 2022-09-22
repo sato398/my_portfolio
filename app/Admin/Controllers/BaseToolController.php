@@ -31,6 +31,8 @@ class BaseToolController extends AdminController
 
         $grid = new Grid(new BaseTool());
 
+        $grid->model()->orderBy('base_tool_category_id', 'asc');
+
         // $grid->column('id', __('Id'));
         $grid->column('name', 'ツール名');
         $grid->column('slug', 'スラッグ');

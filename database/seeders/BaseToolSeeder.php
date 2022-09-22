@@ -15,7 +15,7 @@ class BaseToolSeeder extends Seeder
         ['name' => 'HTML', 'slug' => 'html', 'base_tool_category_id' => 1], //3
         ['name' => 'CSS', 'slug' => 'css', 'base_tool_category_id' => 1], //4
         ['name' => 'SQL', 'slug' => 'sql', 'base_tool_category_id' => 1], //5
-        ['name' => 'Sacc', 'slug' => 'sass', 'base_tool_category_id' => 1], //6
+        ['name' => 'Sass', 'slug' => 'sass', 'base_tool_category_id' => 1], //6
         ['name' => 'Laravel', 'slug' => 'laravel', 'base_tool_category_id' => 2], //7
         ['name' => 'jQuery', 'slug' => 'jquery', 'base_tool_category_id' => 2], //8
         ['name' => 'Bootstrap', 'slug' => 'bootstrap', 'base_tool_category_id' => 2], //9

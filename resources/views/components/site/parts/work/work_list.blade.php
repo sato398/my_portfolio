@@ -1,7 +1,3 @@
-@php
-    $items = [1,1]
-@endphp
-
 @props([
     'workCategory' => $workCategory ?? '',
 ])

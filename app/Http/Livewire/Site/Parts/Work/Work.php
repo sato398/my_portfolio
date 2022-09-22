@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Site\Parts;
+namespace App\Http\Livewire\Site\Parts\Work;
 
 use Livewire\Component;
 use App\Models\Work as WorkModel;

@@ -117,10 +117,11 @@ class WorkController extends AdminController
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\WorkCategory,id');
         $form->ckeditor('explanation', '説明');
+        $form->text('url', 'URL');
 
         $form->hasMany('workImages', '画像', function (Form\NestedForm $imagesForm) use ($typeEnums) {
+            //item_image
             $imagesForm->image('path', '画像')->move('/tmp', function ($file) {
- //item_image
                 return (string) Str::uuid() . '.' . $file->guessExtension();
             });
             $imagesForm->select('type', '画像タイプ')
