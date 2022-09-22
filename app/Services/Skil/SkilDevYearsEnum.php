@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Services\Skil;
 
@@ -17,18 +19,18 @@ use BenSampo\Enum\Enum;
   */
 final class SkilDevYearsEnum extends Enum
 {
-    const LESS_THAN_1 = 0; //1年未満
-    const MORE_1 = 1; //1年以上
-    const MORE_2 = 2; //2年以上
-    const MORE_3 = 3; //3年以上
+    public const LESS_THAN_1 = 0; //1年未満
+    public const MORE_1 = 1; //1年以上
+    public const MORE_2 = 2; //2年以上
+    public const MORE_3 = 3; //3年以上
 
     public $skilArray;
 
 
     //返ってくる説明を日本語化
-    public static function getDescription($value) : string
+    public static function getDescription($value): string
     {
-        return match($value){
+        return match ($value) {
             self::LESS_THAN_1 => '1年未満',
             self::MORE_1 => '1年以上',
             self::MORE_2 => '2年以上',
@@ -38,9 +40,9 @@ final class SkilDevYearsEnum extends Enum
     }
 
     //キーを日本語化
-    public static function getValue(string $key) : mixed
+    public static function getValue(string $key): mixed
     {
-        return match($key){
+        return match ($key) {
             '1年未満' => self::LESS_THAN_1,
             '1年以上' => self::MORE_1,
             '2年以上' => self::MORE_2,
@@ -49,5 +51,4 @@ final class SkilDevYearsEnum extends Enum
 
         return parent::getValue($key);
     }
-
 }

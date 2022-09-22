@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SkilTool extends Model
 {
-    use HasFactory, ModelTree, AdminBuilder, SoftDeletes;
+    use HasFactory;
+    use ModelTree;
+    use AdminBuilder;
+    use SoftDeletes;
 
     protected $fillable = [
         'skil_id',

@@ -16,9 +16,7 @@ use App\Models\BaseToolVersion;
 use Illuminate\Support\Facades\Storage;
 use App\Admin\Selectable\BaseTools;
 use App\Admin\Selectable\BasePositions;
-
 use App\Models\WorkCategory;
-
 use App\Services\Work\WorkImageTypeEnum;
 
 class WorkController extends AdminController
@@ -72,14 +70,14 @@ class WorkController extends AdminController
         $show->field('explanation', '説明')->as(function ($content) {
             return "{$content}";
         });
-        $show->workImages('画像', function($images){
+        $show->workImages('画像', function ($images) {
             $images->resource('/admin/images');
 
             $images->disableCreateButton();
             $images->disableExport();
 
             // $images->id();
-            $images->type('ツール')->display(function($type){
+            $images->type('ツール')->display(function ($type) {
                 return WorkImageTypeEnum::getDescription($type);
             });
             $images->path('画像')->image();
@@ -119,9 +117,11 @@ class WorkController extends AdminController
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\WorkCategory,id');
         $form->ckeditor('explanation', '説明');
+        $form->text('url', 'URL');
 
-        $form->hasMany('workImages', '画像', function(Form\NestedForm $imagesForm) use($typeEnums){
-            $imagesForm->image('path', '画像')->move('/tmp', function ($file){ //item_image
+        $form->hasMany('workImages', '画像', function (Form\NestedForm $imagesForm) use ($typeEnums) {
+            //item_image
+            $imagesForm->image('path', '画像')->move('/tmp', function ($file) {
                 return (string) Str::uuid() . '.' . $file->guessExtension();
             });
             $imagesForm->select('type', '画像タイプ')
@@ -133,7 +133,7 @@ class WorkController extends AdminController
 
         $form->belongsToMany('basePositions', BasePositions::class, '担当箇所');
 
-        $form->saving(function($form){
+        $form->saving(function ($form) {
             $slug = $form->input('slug');
             $slug = str_replace(' ', '-', $slug);
             $slug = Str::lower($slug);
@@ -152,11 +152,11 @@ class WorkController extends AdminController
             $itemImageDir = '/work-images/' . $item->id;
 
             //画像をループ
-            $item->workImages->each(function($image, $key) use ($itemImageDir){
+            $item->workImages->each(function ($image, $key) use ($itemImageDir) {
                 //一時ディレクトリ「tmp」に保存されている画像かどうか判定
                 preg_match('{^tmp/(.+?)\.(.+?)$}us', $image->path, $match);
 
-                if(!isset($match[2])){
+                if (!isset($match[2])) {
                     //正規表現に一致してない場合はスキップ
                     return;
                 }
@@ -167,12 +167,12 @@ class WorkController extends AdminController
                 $newPath =  $itemImageDir . '/' . $image->id . '.' . $extension;
 
                 //新しいpathの画像が既に存在する場合は削除しておく
-                if(Storage::exists($newPath)){
+                if (Storage::exists($newPath)) {
                     Storage::delete($newPath);
                 }
 
                 //新しいpathにファイルを移動させて、画像情報も更新する
-                if(Storage::move($image->path, $newPath) === true){
+                if (Storage::move($image->path, $newPath) === true) {
                     $image->update([
                         'path' => $newPath,
                     ]);
@@ -183,8 +183,8 @@ class WorkController extends AdminController
             $itemImages = $item->workImages->pluck('path'); //今商品とデータ的に関連づいてる画像パス
 
             //この商品の画像ディレクトリにあるすべての画像ファイル
-            collect(Storage::files($itemImageDir))->each(function($dirImage) use ($itemImages) {
-                if(!$itemImages->contains('/' . $dirImage)){
+            collect(Storage::files($itemImageDir))->each(function ($dirImage) use ($itemImages) {
+                if (!$itemImages->contains('/' . $dirImage)) {
                     Storage::delete('/' . $dirImage);
                 }
             });

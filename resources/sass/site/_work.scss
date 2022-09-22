@@ -6,12 +6,17 @@
     background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, .5);
     background-blend-mode: lighten;
+    min-height: 100vh;
 }
 
 .portfolio-item-wrap{
     &:not(:first-of-type){
         margin-top: 100px;
     }
+}
+
+.portfolio-item{
+    display: inline-block;
 }
 
 .portfolio-item-head-wrap{
@@ -30,4 +35,8 @@
     font-family: 'rhythm-one', sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.portfolio-item-caption-content-title{
+    text-transform: none !important;
 }

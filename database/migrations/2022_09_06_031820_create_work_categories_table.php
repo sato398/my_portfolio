@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('work_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_en');
             $table->string('slug');
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();

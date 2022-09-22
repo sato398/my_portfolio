@@ -3,7 +3,7 @@
 
   var menuToggle = document.querySelector('.menu-toggle');
   var sidebar = document.querySelector('#sidebar-wrapper');
-  
+
   if (menuToggle) {
     // Closes the sidebar menu
     menuToggle.addEventListener('click', function(e) {
@@ -11,9 +11,9 @@
 
       sidebar.classList.toggle('active');
       menuToggle.classList.toggle('active');
-      
+
       var icon = menuToggle.querySelector('.fa-bars, .fa-times');
-      
+
       if (icon) {
         if (icon.classList.contains('fa-times')) {
           icon.classList.remove('fa-times');
@@ -37,9 +37,9 @@
       item.addEventListener('click', function (event) {
         sidebar.classList.remove('active');
         menuToggle.classList.remove('active');
-        
+
         var icon = menuToggle.querySelector('.fa-bars, .fa-times');
-      
+
         if (icon) {
           if (icon.classList.contains('fa-times')) {
             icon.classList.remove('fa-times');
@@ -55,9 +55,9 @@
 
   // Scroll to top button appear
   var scrollToTop = document.querySelector('.scroll-to-top');
-  
+
   if (scrollToTop) {
-    
+
     // Scroll to top button appear
     window.addEventListener('scroll', function() {
       var scrollDistance = window.pageYOffset;
@@ -78,8 +78,8 @@ var onMapMouseleaveHandler = function(e) {
   this.addEventListener('click', onMapClickHandler);
   this.removeEventListener('mouseleave', onMapMouseleaveHandler);
 
-  var iframe = this.querySelector('iframe'); 
-  
+  var iframe = this.querySelector('iframe');
+
   if (iframe) {
     iframe.style.pointerEvents = 'none';
   }
@@ -92,8 +92,8 @@ var onMapClickHandler = function(e) {
   this.addEventListener('mouseleave', onMapMouseleaveHandler);
 
   // Enable scrolling zoom
-  var iframe = this.querySelector('iframe'); 
-  
+  var iframe = this.querySelector('iframe');
+
   if (iframe) {
     iframe.style.pointerEvents = 'auto';
   }

@@ -13,13 +13,16 @@ use App\Models\WorkImage;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 //理論削除のonDeleteのライブラリ
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Work extends Model
 {
-    use HasFactory, ModelTree, AdminBuilder, SoftDeletes, SoftCascadeTrait;
+    use HasFactory;
+    use ModelTree;
+    use AdminBuilder;
+    use SoftDeletes;
+    use SoftCascadeTrait;
 
     protected $softCascade = ['workImages', 'workTools', 'workPositions']; //理論削除のカスケード
 

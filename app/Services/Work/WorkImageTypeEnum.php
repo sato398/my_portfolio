@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Services\Work;
 
@@ -17,16 +19,16 @@ use BenSampo\Enum\Enum;
   */
 final class WorkImageTypeEnum extends Enum
 {
-    const DESKTOP = 1; //デスクトップ
-    const PHONE = 2; //スマホ
+    public const DESKTOP = 1; //デスクトップ
+    public const PHONE = 2; //スマホ
 
     public $skilArray;
 
 
     //返ってくる説明を日本語化
-    public static function getDescription($value) : string
+    public static function getDescription($value): string
     {
-        return match($value){
+        return match ($value) {
             self::DESKTOP => 'デスクトップ',
             self::PHONE => 'スマホ',
             default => '不明',
@@ -34,14 +36,13 @@ final class WorkImageTypeEnum extends Enum
     }
 
     //キーを日本語化
-    public static function getValue(string $key) : mixed
+    public static function getValue(string $key): mixed
     {
-        return match($key){
+        return match ($key) {
             'デスクトップ' => self::DESKTOP,
             'スマホ' => self::PHONE,
         };
 
         return parent::getValue($key);
     }
-
 }

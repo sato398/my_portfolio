@@ -2,7 +2,7 @@
 
     <x-slot name="content">
 
-        <x-site.parts.work.work />
+        @livewire('site.parts.work.work')
 
     </x-slot>
 

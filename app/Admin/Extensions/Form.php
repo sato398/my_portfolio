@@ -47,7 +47,7 @@ class Form extends FormOrigin
         if ($className = static::findFieldClass($method)) {
             $column = Arr::get($arguments, 0, ''); //[0];
 
-            if($method === 'hasMany'){
+            if ($method === 'hasMany') {
                 $element = new HasMany($column, array_slice($arguments, 1));
             } else {
                 $element = new $className($column, array_slice($arguments, 1));

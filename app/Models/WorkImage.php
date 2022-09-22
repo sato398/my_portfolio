@@ -11,7 +11,10 @@ use Encore\Admin\Traits\ModelTree;
 
 class WorkImage extends Model
 {
-    use HasFactory, SoftDeletes, AdminBuilder, ModelTree;
+    use HasFactory;
+    use SoftDeletes;
+    use AdminBuilder;
+    use ModelTree;
 
     protected $fillable = [
         'work_id',

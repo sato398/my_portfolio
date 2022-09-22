@@ -30,7 +30,7 @@ class NestedFormHasMany extends HasManyOrigin
      */
     protected function buildNestedForm($column, \Closure $builder, $model = null)
     {
-        $form = app()->make(Form\NestedForm::class,['relation' => $column, 'model' => $model]);
+        $form = app()->make(Form\NestedForm::class, ['relation' => $column, 'model' => $model]);
 
         if ($this->form instanceof WidgetForm) {
             $form->setWidgetForm($this->form);

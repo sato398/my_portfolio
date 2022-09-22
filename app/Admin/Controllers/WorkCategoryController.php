@@ -30,6 +30,7 @@ class WorkCategoryController extends AdminController
 
         // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
+        $grid->column('name_en', 'カテゴリー名(英語)');
         $grid->column('slug', 'スラッグ');
         $grid->column('sort', 'ソート順');
         // $grid->column('parent_id', __('Parent id'));
@@ -55,6 +56,7 @@ class WorkCategoryController extends AdminController
 
         // $show->field('id', __('Id'));
         $show->field('name', 'カテゴリー名');
+        $show->field('name_en', 'カテゴリー名(英語)');
         $show->field('slug', 'スラッグ');
         $show->field('sort', 'ソート順');
         // $show->field('parent_id', __('Parent id'));
@@ -78,9 +80,10 @@ class WorkCategoryController extends AdminController
         $form = new Form(new WorkCategory());
 
         $form->text('name', 'カテゴリー名');
+        $form->text('name_en', 'カテゴリー名(英語)');
         $form->text('slug', 'スラッグ');
 
-        $form->saving(function($form){
+        $form->saving(function ($form) {
             $slug = $form->input('slug');
             $slug = str_replace(' ', '-', $slug);
             $slug = Str::lower($slug);

@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\WorkCategory;
-
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
@@ -39,7 +38,6 @@ class WorkCategorySortController extends Controller
     protected function form()
     {
         return Admin::form(Work::class, function (Form $form) {
-
         });
     }
 }

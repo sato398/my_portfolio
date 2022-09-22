@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Skil;
-
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
@@ -20,11 +19,11 @@ class SkilSortController extends Controller
     {
         $baseTools = BaseToolCategory::all();
 
-        return Admin::content(function (Content $content) use($baseTools){
+        return Admin::content(function (Content $content) use ($baseTools) {
             $content->header('スキルカテゴリーの並び順');
-            $content->body(Skil::tree(function ($tree) use($baseTools){
+            $content->body(Skil::tree(function ($tree) use ($baseTools) {
                 $tree->disableCreate();
-                $tree->branch(function ($branch) use($baseTools){
+                $tree->branch(function ($branch) use ($baseTools) {
                     $name = $baseTools->where('id', $branch['base_tool_category_id'])->first()->name;
                     return "カテゴリー名：{$name}";
                 });
@@ -40,7 +39,6 @@ class SkilSortController extends Controller
     protected function form()
     {
         return Admin::form(Skil::class, function (Form $form) {
-
         });
     }
 }

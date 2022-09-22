@@ -23,11 +23,11 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->nullOnDelete();
             $table->string('explanation', 2000);
+            $table->string('url')->nullable();
             $table->unsignedInteger('sort')->nullable();
             $table->integer('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

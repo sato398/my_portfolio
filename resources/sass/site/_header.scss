@@ -18,7 +18,7 @@ header{
 
 .navbar{
     @include lg{
-        padding-left: 45%;
+        padding-left: 45% !important;
     }
 
     @include md{
@@ -69,4 +69,8 @@ header{
 
 .st0{
     fill:#FFFFFF;
+}
+
+.navbar-collapse{
+    flex-grow: 0 !important;
 }
