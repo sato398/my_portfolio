@@ -28,9 +28,11 @@ class BasePositionController extends AdminController
     {
         $grid = new Grid(new BasePosition());
 
+        $grid->model()->orderBy('sort', 'asc');
+
         // $grid->column('id', __('Id'));
         $grid->column('name', '担当範囲名');
-        // $grid->column('sort', __('Sort'));
+        $grid->column('sort', 'ソート順')->sortable();
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
@@ -54,7 +56,7 @@ class BasePositionController extends AdminController
 
         // $show->field('id', __('Id'));
         $show->field('name', '担当範囲名');
-        // $show->field('sort', __('Sort'));
+        $show->field('sort', 'ソート順');
         // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
@@ -79,6 +81,9 @@ class BasePositionController extends AdminController
         $form->text('slug', 'スラッグ');
         // $form->number('sort', __('Sort'));
         // $form->number('parent_id', __('Parent id'));
+
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
 
         $form->saving(function ($form) {
             $slug = $form->input('slug');

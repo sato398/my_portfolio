@@ -16,11 +16,13 @@
                 <h2 class="portfolio-item-caption-content-title">{{ $item->title }}</h2>
             </div>
         </div>
-        @if (!isset($thumbnail))
-            <img class="img-fluid" src="{{ '/storage/images/no-image.png'}}">
-        @else
-            <img class="img-fluid" src="{{ '/storage' . $thumbnail?->path }}">
-        @endif
+        <div class="portfolio-item-image-wrap">
+            @if (!isset($thumbnail))
+                <img class="img-fluid object-fit-cover" src="{{ '/storage/images/no-image.png'}}">
+            @else
+                {!! \App\Http\Assets\WorkImages::item($item) !!}
+            @endif
+        </div>
 
     </a>
 </div>

@@ -37,11 +37,14 @@ class WorkController extends AdminController
     {
         $grid = new Grid(new Work());
 
+        $grid->model()->orderBy('sort', 'asc');
+
         // $grid->column('id', __('Id'));
         $grid->column('title', 'タイトル');
         $grid->column('slug', 'スラッグ');
         $grid->workCategory()->name('カテゴリー名');
         // $grid->column('explanation', '説明');
+        $grid->column('sort', 'ソート順')->sortable();
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
         })->sortable();
@@ -66,7 +69,17 @@ class WorkController extends AdminController
         $show->field('title', 'タイトル');
         $show->field('slug', 'スラッグ');
         // $show->field('work_category_id', 'カテゴリー');
-        $show->relation('workCategory', 'カテゴリー', 'カテゴリー');
+        $show->workCategory('カテゴリー', function($workCategory) {
+            $workCategory->field('name', 'カテゴリー名');
+            $workCategory->field('name_en', 'カテゴリー名(英語)');
+            $workCategory->field('slug', 'スラッグ');
+            $workCategory->panel()
+            ->tools(function ($tools) {
+                // $tools->disableEdit();
+                // $tools->disableList();
+                $tools->disableDelete();
+            });
+        });
         $show->field('explanation', '説明')->as(function ($content) {
             return "{$content}";
         });
@@ -90,6 +103,13 @@ class WorkController extends AdminController
         $show->field('updated_at', '更新日時')->as(function ($updatedAt) {
             return Carbon::parse($updatedAt)->format('Y/m/d H:i:s');
         });
+
+        $show->panel()
+            ->tools(function ($tools) {
+                // $tools->disableEdit();
+                // $tools->disableList();
+                $tools->disableDelete();
+            });
 
         return $show;
     }
@@ -132,6 +152,9 @@ class WorkController extends AdminController
         $form->belongsToMany('baseTools', BaseTools::class, 'ツール名');
 
         $form->belongsToMany('basePositions', BasePositions::class, '担当箇所');
+
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
 
         $form->saving(function ($form) {
             $slug = $form->input('slug');

@@ -35,9 +35,11 @@ class SkilController extends AdminController
 
         $grid = new Grid(new Skil());
 
+        $grid->model()->orderBy('sort', 'asc');
+
         // $grid->column('id', __('Id'));
         $grid->baseToolCategory()->name('カテゴリー名');
-        $grid->column('sort', 'ソート順');
+        $grid->column('sort', 'ソート順')->sortable();
         $grid->column('items', 'ツール')->display(function () {
             return '一覧';
         })->expand(function () use ($baseTools) {
@@ -116,6 +118,9 @@ class SkilController extends AdminController
             )->rules('required');
             $toolsForm->icon('icon', 'アイコン');
         })->useTable();
+
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
 
         if ($form->isCreating()) {
             $exist = false;

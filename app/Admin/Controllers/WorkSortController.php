@@ -40,6 +40,7 @@ class WorkSortController extends Controller
     protected function form()
     {
         return Admin::form(Work::class, function (Form $form) {
+
         });
     }
 }

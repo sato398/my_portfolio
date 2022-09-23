@@ -15,28 +15,33 @@
 @endphp
 
 <div class="portfolio-detail-images mt-5">
-    <div class="portfolio-detail-image-wrap-pc">
-        @foreach ($pcImages as $image)
-            <div class="portfolio-detail-image-wrap">
-                @if (WorkImageTypeEnum::getDescription($image->type) === "デスクトップ")
-                    <img class="portfolio-detail-image w-100 h-auto" src="{{ '/storage' . $image->path }}">
-                @else
+    @if (!$pcImages->isEmpty())
+        <div class="portfolio-detail-images-wrap-pc">
+            @foreach ($pcImages as $image)
+                <div class="portfolio-detail-image-wrap portfolio-detail-image-wrap-pc">
+                    @if (WorkImageTypeEnum::getDescription($image->type) === "デスクトップ")
+                        <img class="portfolio-detail-image w-100 h-auto" src="{{ '/storage' . $image->path }}">
+                    @else
 
-                @endif
-            </div>
-        @endforeach
-    </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    @endif
 
-    <div class="portfolio-detail-images-sp row">
-        @foreach ($spImages as $image)
-            <div class="portfolio-detail-image-wrap-sp col-lg-4 col-md-6 col-sm-12">
-                @if (WorkImageTypeEnum::getDescription($image->type) === "スマホ")
-                    <img class="portfolio-detail-image-sp w-100 h-auto" src="{{ '/storage' . $image->path }}">
-                @else
+    @if (!$spImages->isEmpty())
+        <div class="portfolio-detail-image-wrap portfolio-detail-images-sp row">
+            @foreach ($spImages as $image)
+                <div class="portfolio-detail-image-wrap-sp col-lg-4 col-md-6 col-sm-12">
+                    @if (WorkImageTypeEnum::getDescription($image->type) === "スマホ")
+                        <img class="portfolio-detail-image-sp w-100 h-auto" src="{{ '/storage' . $image->path }}">
+                    @else
 
-                @endif
-            </div>
-        @endforeach
-    </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    @endif
+
 </div>
 

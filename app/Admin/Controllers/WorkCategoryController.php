@@ -28,11 +28,13 @@ class WorkCategoryController extends AdminController
     {
         $grid = new Grid(new WorkCategory());
 
+        $grid->model()->orderBy('sort', 'asc');
+
         // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
         $grid->column('name_en', 'カテゴリー名(英語)');
         $grid->column('slug', 'スラッグ');
-        $grid->column('sort', 'ソート順');
+        $grid->column('sort', 'ソート順')->sortable();
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
@@ -82,6 +84,9 @@ class WorkCategoryController extends AdminController
         $form->text('name', 'カテゴリー名');
         $form->text('name_en', 'カテゴリー名(英語)');
         $form->text('slug', 'スラッグ');
+
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
 
         $form->saving(function ($form) {
             $slug = $form->input('slug');

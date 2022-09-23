@@ -31,6 +31,13 @@
             @endforeach
         </p>
     </div>
+    @if (isset($item->url))
+        <div class="text-center work-item-url mt-5">
+            <p class="text-center work-item-position mt-1">
+                リンク：<a href="{{ $item->url }}" target="__blank">{{ $item->title }}</a>
+            </p>
+        </div>
+    @endif
 
     <x-site.parts.work.item.item_image :item="$item"/>
 </div>

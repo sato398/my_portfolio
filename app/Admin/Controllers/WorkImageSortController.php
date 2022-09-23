@@ -24,7 +24,7 @@ class WorkImageSortController extends Controller
                 $tree->disableCreate();
                 $tree->branch(function ($branch) use ($works) {
                     $src = '/storage' . $branch['path'];
-                    $logo = "<img src='$src' style='max-width:150px;max-height:150px' class='img'/>";
+                    $logo = "<img src='$src' style='max-width:100px;max-height:100px' class='img'/>";
                     $work = $works->where('id', $branch['work_id'])->first()->title;
                     return "ワークタイトル：{$work}  / 画像：{$logo}";
                 });

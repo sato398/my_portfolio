@@ -79,6 +79,9 @@ class BaseToolCategoryController extends AdminController
         $form->text('name_en', 'カテゴリー名(英語)');
         $form->text('slug', 'スラッグ');
 
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
+
         $form->saving(function ($form) {
             $slug = $form->input('slug');
             $slug = str_replace(' ', '-', $slug);

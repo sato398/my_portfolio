@@ -4,7 +4,7 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .7);
     background-blend-mode: lighten;
     min-height: 100vh;
 }
@@ -17,6 +17,7 @@
 
 .portfolio-item{
     display: inline-block;
+    width: 100%;
 }
 
 .portfolio-item-head-wrap{
@@ -39,4 +40,14 @@
 
 .portfolio-item-caption-content-title{
     text-transform: none !important;
+}
+
+.portfolio-item-image-wrap{
+
+}
+
+.object-fit-cover{
+    width: 100%;
+    object-fit: cover;
+    object-position: 0 50%;
 }

@@ -13,11 +13,14 @@
     margin: 0 auto;
   }
 
-  .portfolio-detail-images-sp {
-    position: relative;
-    width: 75%;
-    margin: 0 auto;
+  .portfolio-detail-image-wrap-pc{
+    &+& {
+        margin-top: 30px;
+    }
+  }
 
+  .portfolio-detail-images-sp {
+    margin-top: 30px;
     @include sx {
         &:nth-of-type(n+2){
             .portfolio-detail-image-wrap-sp{

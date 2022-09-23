@@ -8,12 +8,12 @@ use App\Models\WorkPosition;
 use Illuminate\Database\Eloquent\SoftDeletes;
 //理論削除のonDeleteのライブラリ
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Encore\Admin\Traits\AdminBuilder;
+use Encore\Admin\Traits\ModelTree;
 
 class BasePosition extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-    use SoftCascadeTrait;
+    use HasFactory, SoftDeletes, SoftCascadeTrait, AdminBuilder, ModelTree;
 
     /**
      * 理論削除のonDeleteのライブラリ
@@ -26,10 +26,21 @@ class BasePosition extends Model
     protected $fillable = [
         'name',
         'slug',
+        'sort',
+        'parent_id',
     ];
 
     public function workPositions()
     {
         return $this->hasMany(WorkPosition::class);
+    }
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setParentColumn('parent_id');
+        $this->setOrderColumn('sort');
+        $this->setTitleColumn('version');
     }
 }

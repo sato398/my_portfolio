@@ -39,7 +39,7 @@ class BaseToolController extends AdminController
         $grid->column('base_tool_category_id', 'カテゴリー')->display(function () use ($baseToolCatogories) {
             return $baseToolCatogories->where('id', $this->base_tool_category_id)->first()->name;
         });
-        $grid->column('sort', 'ソート番号');
+        $grid->column('sort', 'ソート番号')->sortable();
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
@@ -96,6 +96,9 @@ class BaseToolController extends AdminController
         $form->hasMany('baseToolVersions', 'バージョン', function (Form\NestedForm $versionsForm) {
             $versionsForm->text('version', 'バージョン');
         })->useTable();
+
+        $form->confirm('本当に登録しますか？', 'create');
+        $form->confirm('本当に変更しますか？', 'edit');
 
         $form->saving(function ($form) {
             $slug = $form->input('slug');
