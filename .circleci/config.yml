@@ -98,10 +98,10 @@ workflows:
   Test:
     jobs:
       - Test:
-          filters:
-            branches:
-              ignore:
-                - master
+        filters:
+          branches:
+            ignore:
+              - master
   Build-and-Deploy:
     jobs:
       - Test:
