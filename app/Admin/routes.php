@@ -25,7 +25,6 @@ Route::group([
     $router->resource('work-image-sort', 'WorkImageSortController', ['only' => ['index', 'store']]);
 
     $router->resource('skils', 'SkilController');
-    $router->resource('skil-categories', 'SkilCategoryController');
     $router->resource('skil-sort', 'SkilSortController', ['only' => ['index', 'store']]);
     $router->resource('skil-tool-sort', 'SkilToolSortController', ['only' => ['index', 'store']]);
 });
