@@ -111,7 +111,7 @@ workflows:
       - Deploy:
           requires:
             - Test
-          env: staging
+          env: product
           fingerprints: ${FINGER_POINTS}
           host: ${SSH_HOST}
           sh_dir: ${SSH_SH_DIR}
