@@ -14,7 +14,7 @@ class HttpTest extends TestCase
 
     protected $adminUser;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -25,7 +25,7 @@ class HttpTest extends TestCase
     }
 
     //dataProvider
-    public function simpleGetRequestTestTargets() : array
+    public function simpleGetRequestTestTargets(): array
     {
         $data = [];
 
@@ -33,7 +33,7 @@ class HttpTest extends TestCase
 
         //$router->resourceでルーティング生成しているものはURL構造が同じなので、ループでデータ作成
         //array[0]がPath、[1]がModel名
-        foreach(
+        foreach (
             [
                 ['/admin/base-tool-categories', 'BaseToolCategory'],
                 ['/admin/base-tools', 'BaseTool'],
@@ -41,12 +41,10 @@ class HttpTest extends TestCase
                 ['/admin/work-categories', 'WorkCategory'],
                 ['/admin/works', 'Work'],
                 ['/admin/skils', 'Skil'],
-            ]
-            as
-            [
+            ] as [
                 $path, $model
             ]
-        ){
+        ) {
             //結果がレコードの有無に依存するURLは、array[1]に依存しているModel名を渡す
             $data[] = [$path]; //一覧
             $data[] = [$path . '/create']; //新規作成画面
