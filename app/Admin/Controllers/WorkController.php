@@ -69,7 +69,7 @@ class WorkController extends AdminController
         $show->field('title', 'タイトル');
         $show->field('slug', 'スラッグ');
         // $show->field('work_category_id', 'カテゴリー');
-        $show->workCategory('カテゴリー', function($workCategory) {
+        $show->workCategory('カテゴリー', function ($workCategory) {
             $workCategory->field('name', 'カテゴリー名');
             $workCategory->field('name_en', 'カテゴリー名(英語)');
             $workCategory->field('slug', 'スラッグ');

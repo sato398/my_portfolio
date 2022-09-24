@@ -11,21 +11,21 @@ class Ogp
     public static function get($key)
     {
         $url = Canonical::get($key);
-        if(!$url){
+        if (!$url) {
             return '';
         }
 
         $title = Title::get($key);
         $title = $title['title'];
 
-        $type = match($key){
+        $type = match ($key) {
             'top' => 'website',
             default => 'article',
         };
 
         //商品ページなら商品画像を
         //それ以外は、サイト、ストアのOGP画像を返す
-        $image = match($key){
+        $image = match ($key) {
             'site.work-item' => '',
             default => '',
         };

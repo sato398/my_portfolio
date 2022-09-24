@@ -13,7 +13,11 @@ use Encore\Admin\Traits\ModelTree;
 
 class BasePosition extends Model
 {
-    use HasFactory, SoftDeletes, SoftCascadeTrait, AdminBuilder, ModelTree;
+    use HasFactory;
+    use SoftDeletes;
+    use SoftCascadeTrait;
+    use AdminBuilder;
+    use ModelTree;
 
     /**
      * 理論削除のonDeleteのライブラリ

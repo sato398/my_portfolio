@@ -17,7 +17,7 @@ class Title
 
     public static function title($key)
     {
-        if($key === 'site.work-item') {
+        if ($key === 'site.work-item') {
             $item = SingletonWorkModelForSeo::get();
             return $item ? $item->title . ' -- Nao\'s Portfolio' : '';
         }

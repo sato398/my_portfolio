@@ -10,9 +10,9 @@ class Domain
 
         $admin = config('admin.route.prefix');
 
-        if(preg_match('/^'.$admin.'*?/', $type)){
+        if (preg_match('/^' . $admin . '*?/', $type)) {
             return 'admin';
-        }else{
+        } else {
             return 'site';
         }
     }

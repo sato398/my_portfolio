@@ -38,6 +38,6 @@ Route::get('/about', function () {
 })->name('about');
 
 //404
-Route::fallback(function(){
+Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });

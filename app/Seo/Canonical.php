@@ -11,7 +11,7 @@ class Canonical
     {
         $routeName = self::routeName($key);
 
-        if(!is_scalar($routeName)){
+        if (!is_scalar($routeName)) {
             [$routeName, $routeParams] = $routeName;
             return $routeName ? route($routeName, $routeParams) : '';
         }
@@ -21,7 +21,7 @@ class Canonical
 
     protected static function routeName($key)
     {
-        if($key === 'site.work-item'){
+        if ($key === 'site.work-item') {
             $item = SingletonWorkModelForSeo::get();
             return $item ? ['work.item', ['workSlug' => $item->slug]] : null;
         }
