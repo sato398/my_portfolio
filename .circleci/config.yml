@@ -108,7 +108,6 @@ workflows:
           filters:
             branches:
               only: master
-              # only: main
       - Deploy:
           requires:
             - Test
@@ -119,4 +118,3 @@ workflows:
           filters:
             branches:
               only: master
-              # only: main
