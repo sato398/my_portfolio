@@ -5,9 +5,19 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Encore\Admin\Form\NestedForm as NestedFormOrigin;
 use App\Admin\Extensions\Form\NestedForm;
+use App\Seo\SingletonWorkModelForSeo;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * 登録する必要のある全コンテナシングルトン
+     *
+     * @var array
+     */
+    public $singletons = [
+        'SingletonWorkModelForSeo' => SingletonWorkModelForSeo::class
+    ];
+
     /**
      * Register any application services.
      *
@@ -15,7 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // $this->app->singleton(
+        //     'SingletonWorkModelForSeo',
+        //     SingletonWorkModelForSeo::class
+        // );
     }
 
     /**

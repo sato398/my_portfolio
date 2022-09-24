@@ -1,0 +1,9 @@
+.error-section{
+    @include sx {
+        padding-top: 74px;
+    }
+
+    @include md {
+        padding-top: 84px;
+    }
+}

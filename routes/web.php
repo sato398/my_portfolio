@@ -36,3 +36,8 @@ Route::group([
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+//404
+Route::fallback(function(){
+    return response()->view('errors.404', [], 404);
+});
