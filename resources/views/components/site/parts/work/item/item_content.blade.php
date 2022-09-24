@@ -1,43 +1,51 @@
 @props([
-    'item' => $item ?? '',
+    'item' => $item,
 ])
 
-<div class="portfolio-detail-head-wrap">
-    <h6 class="text-center text-danger mb-0">{{ $item->workCategory->name }}</h6>
-    <h1 class="text-center portfolio-detail-head">{{ $item->workCategory->name_en }}</h1>
-</div>
-<div class="mt-5">
-    <h2 class="text-center">{{ $item->title }}</h2>
-    <div class="text-center w-75 mx-auto mt-5 mb-5">{!! $item->explanation !!}</div>
-    <div class="text-center work-item-tools">使用したツール
-        <p class="text-center work-item-tool mt-1">
-            @foreach ($item->baseTools as $tool)
-                @if ($loop->last)
-                    {{ $tool->name }}
-                @else
-                    {{ $tool->name }}<span class="slash">/</span><br class="br">
-                @endif
-            @endforeach
-        </p>
+@if (isset($item))
+    <div class="portfolio-detail-head-wrap">
+        <h6 class="text-center text-danger mb-0">{{ $item->workCategory->name }}</h6>
+        <h1 class="text-center portfolio-detail-head">{{ $item->workCategory->name_en }}</h1>
     </div>
-    <div class="text-center work-item-positions">担当箇所
-        <p class="text-center work-item-position mt-1">
-            @foreach ($item->basePositions as $position)
-                @if ($loop->last)
-                    {{ $position->name }}
-                @else
-                    {{ $position->name }}<span class="slash">/</span><br class="br">
-                @endif
-            @endforeach
-        </p>
-    </div>
-    @if (isset($item->url))
-        <div class="text-center work-item-url mt-5">
-            <p class="text-center work-item-position mt-1">
-                リンク：<a href="{{ $item->url }}" target="__blank">{{ $item->title }}</a>
+    <div class="mt-5">
+        <h2 class="text-center">{{ $item->title }}</h2>
+        <div class="text-center w-75 mx-auto mt-5 mb-5">{!! $item->explanation !!}</div>
+        <div class="text-center work-item-tools">使用したツール
+            <p class="text-center work-item-tool mt-1">
+                @foreach ($item->baseTools as $tool)
+                    @if ($loop->last)
+                        {{ $tool->name }}
+                    @else
+                        {{ $tool->name }}<span class="slash">/</span><br class="br">
+                    @endif
+                @endforeach
             </p>
         </div>
-    @endif
+        <div class="text-center work-item-positions">担当箇所
+            <p class="text-center work-item-position mt-1">
+                @foreach ($item->basePositions as $position)
+                    @if ($loop->last)
+                        {{ $position->name }}
+                    @else
+                        {{ $position->name }}<span class="slash">/</span><br class="br">
+                    @endif
+                @endforeach
+            </p>
+        </div>
+        @if (isset($item->url))
+            <div class="text-center work-item-url mt-5">
+                <p class="text-center work-item-position mt-1">
+                    リンク：<a href="{{ $item->url }}" target="__blank">{{ $item->title }}</a>
+                </p>
+            </div>
+        @endif
 
-    <x-site.parts.work.item.item_image :item="$item"/>
-</div>
+        <x-site.parts.work.item.item_image :item="$item"/>
+    </div>
+
+@else
+    <div class="text-center">
+        該当の実績が見つかりませんでした。
+    </div>
+@endif
+

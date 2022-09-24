@@ -1,6 +1,6 @@
 @php
     use App\Services\Skil\SkilDevYearsEnum;
-    $iconSet = is_null($item->icon)
+    $iconSet = !is_null($item->icon)
 @endphp
 
 @props([
@@ -13,6 +13,7 @@
         <i @class([
             $item->icon => $iconSet,
             'icon-screen-smartphone' => !$iconSet,
+            'service-icon-i'
             ])>
         </i>
     </span>

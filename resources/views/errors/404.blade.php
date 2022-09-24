@@ -1,4 +1,4 @@
-@php($key = 'errors.404';)
+@php($key = 'errors.404')
 
 @extends('errors::errors')
 

@@ -149,3 +149,14 @@
         transform: translate(-50%, 25%) rotate(45deg);
     }
 }
+
+.service-icon{
+    position: relative;
+}
+
+.service-icon-i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
