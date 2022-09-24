@@ -107,8 +107,8 @@ workflows:
       - Test:
           filters:
             branches:
-              # only: master
-              only: main
+              only: master
+              # only: main
       - Deploy:
           requires:
             - Test
@@ -118,5 +118,5 @@ workflows:
           sh_dir: ${SSH_SH_DIR}
           filters:
             branches:
-              # only: master
-              only: main
+              only: master
+              # only: main
