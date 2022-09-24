@@ -9,7 +9,8 @@ use Tests\TestCase;
 
 class HttpTest extends TestCase
 {
-    use WithFaker, DatabaseMigrations;
+    use WithFaker;
+    use DatabaseMigrations;
 
     protected $adminUser;
 
@@ -65,10 +66,10 @@ class HttpTest extends TestCase
     {
         //モデルの有無でレスポンスが変わってくるURLは、レコード数をカウントしてレコードの存在をチェックする。
         //レコードが存在する場合は200、存在しなければ404を期待する
-        if(!is_null($model)){
+        if (!is_null($model)) {
             $class = 'App\\Models\\' . $model;
             $statusCode = $class::count() > 0 ? 200 : 404;
-        }else{
+        } else {
             $statusCode = 200;
         }
 
