@@ -1,7 +1,7 @@
 ## 環境構築
 
 ```shell
-$ cd vape_world
+$ cd portfolio
 
 $ composer install
 $ cp .env.example .env
