@@ -405,6 +405,10 @@
   }
 }
 
+.work-item-basic {
+  font-size: 12px;
+}
+
 .about-section-wrap {
   scroll-snap-type: y mandatory;
   overflow: scroll;

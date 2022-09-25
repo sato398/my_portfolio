@@ -129,8 +129,8 @@ class WorkController extends AdminController
 
         $form = new Form(new Work());
 
-        $form->text('title', 'タイトル');
-        $form->text('slug', 'スラッグ');
+        $form->text('title', 'タイトル')->rules('required');
+        $form->text('slug', 'スラッグ')->rules('required');
         $form->select('work_category_id', 'カテゴリー')
         ->options(
             WorkCategory::orderBy('sort', 'asc')->get()
@@ -138,6 +138,8 @@ class WorkController extends AdminController
         )->rules('required|exists:App\Models\WorkCategory,id');
         $form->ckeditor('explanation', '説明');
         $form->text('url', 'URL');
+        $form->text('basic_user_name', 'Basic認証ユーザー名');
+        $form->text('basic_user_password', 'Basic認証パスワード');
 
         $form->hasMany('workImages', '画像', function (Form\NestedForm $imagesForm) use ($typeEnums) {
             //item_image
