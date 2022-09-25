@@ -17,6 +17,6 @@
             ])>
         </i>
     </span>
-    <h4><strong>{{ $tools->where('id', $item->base_tool_id)->first()->name }}</strong></h4>
+    <h3 class="skil-tool-title"><strong>{{ $tools->where('id', $item->base_tool_id)->first()->name }}</strong></h3>
     <p class="mb-0 text-faded">{{ SkilDevYearsEnum::getDescription($item->years_of_dev) }}</p>
 </div>

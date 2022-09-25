@@ -11,8 +11,8 @@
     <div class="container">
         <div class="service-items">
             <div class="service-item-head-wrap">
-                <h6 class="text-secondary mb-0">{{ $skilList->baseToolCategory->name }}</h6>
-                <h1 class="service-item-head">{{ $skilList->baseToolCategory->name_en }}</h1>
+                <div class="text-secondary mb-0 skil-category-head">{{ $skilList->baseToolCategory->name }}</div>
+                <h2 class="service-item-head skil-category-head-en">{{ $skilList->baseToolCategory->name_en }}</h2>
             </div>
             <div class="row service-item-body">
                 @foreach ($skilList->items as $item)
