@@ -67,9 +67,6 @@ jobs:
     docker:
       - image: cimg/base:edge
         parameters:
-    # env:
-    #   type: enum
-    #   enum: ["staging", "product"]
     parameters:
       fingerprints:
         type: string
