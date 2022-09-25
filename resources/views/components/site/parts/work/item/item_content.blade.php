@@ -42,10 +42,10 @@
         @if (isset($item->basic_user_name))
         <div class="text-center work-item-basic">
             <p class="text-center work-item-basic-name mt-1">
-                Basic認証ユーザー名：{{ $item->basic_user_name }}
+                ユーザー名：{{ $item->basic_user_name }}
             </p>
             <p class="text-center work-item-basic-password mt-1">
-                Basic認証パスワード：{{ $item->basic_user_password }}
+                パスワード：{{ $item->basic_user_password }}
             </p>
         </div>
         @endif

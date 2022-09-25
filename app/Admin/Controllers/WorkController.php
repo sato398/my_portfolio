@@ -138,8 +138,8 @@ class WorkController extends AdminController
         )->rules('required|exists:App\Models\WorkCategory,id');
         $form->ckeditor('explanation', '説明');
         $form->text('url', 'URL');
-        $form->text('basic_user_name', 'Basic認証ユーザー名');
-        $form->text('basic_user_password', 'Basic認証パスワード');
+        $form->text('basic_user_name', 'ユーザー名');
+        $form->text('basic_user_password', 'パスワード');
 
         $form->hasMany('workImages', '画像', function (Form\NestedForm $imagesForm) use ($typeEnums) {
             //item_image
