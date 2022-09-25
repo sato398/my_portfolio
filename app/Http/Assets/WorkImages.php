@@ -16,7 +16,7 @@ class WorkImages
     protected function __construct(?Work $item)
     {
         $this->item = $item;
-        $this->itemImage = $item->workImages->first();
+        $this->itemImage = $item->workImages->sortBy('sort')->first();
         $this->imagePath = isset($this->itemImage->path) ? url('/storage' . $this->itemImage->path) : null;
         // $this->doTrim = (bool) ($this->itemImage->cover ?? true);
     }

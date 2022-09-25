@@ -5,10 +5,10 @@
 @php
     use App\Services\Work\WorkImageTypeEnum;
 
-    $pcImages = $item->workImages->filter(function($item, $key) {
+    $pcImages = $item->workImages->sortBy('sort')->filter(function($item, $key) {
         return $item->type == WorkImageTypeEnum::getValue('デスクトップ');
     });
-    $spImages = $item->workImages->filter(function($item, $key) {
+    $spImages = $item->workImages->sortBy('sort')->filter(function($item, $key) {
         return $item->type == WorkImageTypeEnum::getValue('スマホ');
     });
 

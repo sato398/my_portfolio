@@ -4,7 +4,7 @@
 @php
     use App\Services\Work\WorkImageTypeEnum;
 
-    $thumbnail = $item?->workImages->filter(function($image, $key) {
+    $thumbnail = $item?->workImages->sortBy('sort')->filter(function($image, $key) {
         return $image->type == WorkImageTypeEnum::getValue('デスクトップ');
     })->first();
 @endphp
