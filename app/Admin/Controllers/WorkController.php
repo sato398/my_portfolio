@@ -84,6 +84,7 @@ class WorkController extends AdminController
             return "{$content}";
         });
         $show->workImages('画像', function ($images) {
+            $images->model()->orderBy('sort', 'asc');
             $images->resource('/admin/images');
 
             $images->disableCreateButton();
