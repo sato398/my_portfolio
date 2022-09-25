@@ -262,7 +262,7 @@
 }
 
 .portfolio-item {
-  display: inline-block;
+  display: inline;
   width: 100%;
 }
 
