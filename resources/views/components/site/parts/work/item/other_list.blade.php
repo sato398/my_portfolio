@@ -4,8 +4,8 @@
 
 <div class="portfolio-item-wrap mt-5">
     <div class="portfolio-detail-head-wrap">
-        <h6 class="text-center text-danger mb-0">別の実績</h6>
-        <h1 class="text-center portfolio-detail-head">Other Works</h1>
+        <div class="text-center text-danger mb-0 work-category-title">別の実績</div>
+        <h2 class="text-center portfolio-detail-head work-category-title-en">Other Works</h2>
     </div>
     <div class="row g-0 mt-3">
         @foreach ($otherItems as $otherItem)

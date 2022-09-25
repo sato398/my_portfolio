@@ -297,6 +297,14 @@
      object-position: 0 50%;
 }
 
+.work-category-title {
+  font-size: 1rem;
+}
+
+.work-category-title-en {
+  font-size: 2.5rem;
+}
+
 .portfolio-detail-image {
   position: absolute;
   top: 0;
