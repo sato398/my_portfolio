@@ -15,7 +15,7 @@
                 <h2 class="service-item-head skil-category-head-en">{{ $skilList->baseToolCategory->name_en }}</h2>
             </div>
             <div class="row service-item-body">
-                @foreach ($skilList->items as $item)
+                @foreach ($skilList->items->sortBy('sort') as $item)
                     <x-site.parts.skil.item :item="$item" :tools="$tools"/>
                 @endforeach
             </div>

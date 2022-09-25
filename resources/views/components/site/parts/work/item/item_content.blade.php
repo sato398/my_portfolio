@@ -12,7 +12,7 @@
         <div class="text-center w-75 mx-auto mt-5 mb-5">{!! $item->explanation !!}</div>
         <div class="text-center work-item-tools">使用したツール
             <p class="text-center work-item-tool mt-1">
-                @foreach ($item->baseTools as $tool)
+                @foreach ($item->baseTools->sortBy('sort') as $tool)
                     @if ($loop->last)
                         {{ $tool->name }}
                     @else
@@ -23,7 +23,7 @@
         </div>
         <div class="text-center work-item-positions">担当箇所
             <p class="text-center work-item-position mt-1">
-                @foreach ($item->basePositions as $position)
+                @foreach ($item->basePositions->sortBy('sort') as $position)
                     @if ($loop->last)
                         {{ $position->name }}
                     @else
