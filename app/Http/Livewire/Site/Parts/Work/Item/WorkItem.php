@@ -18,7 +18,7 @@ class WorkItem extends Component
 
         abort_if(is_null($this->item), 404);
 
-        $works = Work::with(['workCategory', 'workImages', 'baseTools', 'basePositions'])->orderBy('work_category_id', 'asc')->get();
+        $works = Work::with(['workCategory', 'workImages', 'baseTools', 'basePositions'])->orderBy('sort', 'asc')->get();
         $this->othreItems = $works->whereNotIn('slug', $itemSlug);
     }
 

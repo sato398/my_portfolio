@@ -9,7 +9,7 @@
             <h2 class="text-center portfolio-item-head work-category-title-en">{{ $workCategory->name_en }}</h2>
         </div>
         <div class="row g-0 mt-3">
-            @foreach ($workCategory->works->where('work_category_id', $workCategory->id) as $item)
+            @foreach ($workCategory->works->where('work_category_id', $workCategory->id)->sortBy('sort') as $item)
                 <x-site.parts.work.item :item="$item" />
             @endforeach
         </div>
