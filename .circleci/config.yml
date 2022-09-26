@@ -57,7 +57,7 @@ jobs:
           command: |
             mkdir -p phpunit
             # phpdbg -qrr ./vendor/bin/phpunit --log-junit phpunit/junit.xml --coverage-html phpunit/coverage-report
-            XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=phpunit/coverage-clover.xml --coverage-html=phpunit/coverage --log-junit phpunit/junit.xml
+            XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=phpunit/coverage-clover.xml --coverage-html=phpunit/coverage-report --log-junit phpunit/junit.xml
       - store_test_results:
           path:  phpunit
       - store_artifacts:
