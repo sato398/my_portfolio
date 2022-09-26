@@ -27,7 +27,7 @@
                     @if ($loop->last)
                         {{ $position->name }}
                     @else
-                        {{ $position->name }}<span class="slash">/</span><br class="br">
+                        {{ $position->name }}<span class="slash">/ </span><br class="br">
                     @endif
                 @endforeach
             </p>
