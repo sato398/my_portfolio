@@ -24,7 +24,7 @@ class Work extends Model
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['workImages', 'workTools', 'workPositions']; //理論削除のカスケード
+    protected $softCascade = ['workImages', 'workTools']; //理論削除のカスケード
 
     protected $fillable = [
         'title',
