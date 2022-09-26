@@ -9,7 +9,12 @@
     </div>
     <div class="mt-5">
         <h2 class="text-center">{{ $item->title }}</h2>
-        <div class="text-center w-75 mx-auto mt-5 mb-5">{!! $item->explanation !!}</div>
+        <div class="w-75 mx-auto mt-5 mb-5">
+            @php
+                $content = preg_replace('{<p>}us', '<p class="d-table mx-auto">', $item->explanation);
+            @endphp
+            {!! $content !!}
+        </div>
         <div class="text-center work-item-tools">使用したツール
             <p class="text-center work-item-tool mt-1">
                 @foreach ($item->baseTools->sortBy('sort') as $tool)
