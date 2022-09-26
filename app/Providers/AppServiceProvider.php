@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Encore\Admin\Form\NestedForm as NestedFormOrigin;
 use App\Admin\Extensions\Form\NestedForm;
 use App\Seo\SingletonWorkModelForSeo;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,10 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->app->singleton(
-        //     'SingletonWorkModelForSeo',
-        //     SingletonWorkModelForSeo::class
-        // );
+        //
     }
 
     /**
@@ -38,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (config('app.env') === 'product') {
+            URL::forceScheme('https');
+        }
     }
 }
