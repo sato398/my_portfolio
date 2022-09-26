@@ -4,8 +4,8 @@
 
 @if (isset($item))
     <div class="portfolio-detail-head-wrap">
-        <h6 class="text-center text-danger mb-0">{{ $item->workCategory->name }}</h6>
-        <h1 class="text-center portfolio-detail-head">{{ $item->workCategory->name_en }}</h1>
+        <div class="text-center text-danger mb-0 work-category-title">{{ $item->workCategory->name }}</div>
+        <h2 class="text-center portfolio-detail-head work-category-title-en">{{ $item->workCategory->name_en }}</h2>
     </div>
     <div class="mt-5">
         <h2 class="text-center">{{ $item->title }}</h2>
