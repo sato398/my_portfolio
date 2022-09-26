@@ -28,8 +28,10 @@ jobs:
           cache-version: test
 
       - run:
-          name: apt update
-          command: sudo apt update
+          name: Xdebug
+          command: |
+            sudo -E install-php-extensions xdebug-3.1.5
+            sudo docker-php-ext-enable xdebug
 
       - run:
           name: wait for mysql
@@ -54,7 +56,8 @@ jobs:
           name: testing
           command: |
             mkdir -p phpunit
-            phpdbg -qrr ./vendor/bin/phpunit --log-junit phpunit/junit.xml --coverage-html phpunit/coverage-report
+            # phpdbg -qrr ./vendor/bin/phpunit --log-junit phpunit/junit.xml --coverage-html phpunit/coverage-report
+            XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=phpunit/coverage-clover.xml --coverage-html=phpunit/coverage --log-junit phpunit/junit.xml
       - store_test_results:
           path:  phpunit
       - store_artifacts:
