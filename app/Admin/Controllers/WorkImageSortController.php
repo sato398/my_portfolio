@@ -16,16 +16,22 @@ class WorkImageSortController extends Controller
 
     public function index()
     {
-        $works = Work::with('workImages')->get();
+        $workId = request()->route('work');
 
-        return Admin::content(function (Content $content) use ($works) {
-            $content->header('画像の並び順');
-            $content->body(WorkImage::tree(function ($tree) use ($works) {
+        $works = Work::whereId($workId)->with('workImages')->get();
+
+        return Admin::content(function (Content $content) use ($works, $workId) {
+            $content->header('画像の並び順/' . $works->first()->title);
+            $content->body(WorkImage::tree(function ($tree) use ($works, $workId) {
+                $tree->query(function($query) use($workId){
+                    $query = $query::where('work_id', $workId);
+                    return $query;
+                });
                 $tree->disableCreate();
                 $tree->branch(function ($branch) use ($works) {
                     $src = '/storage' . $branch['path'];
                     $logo = "<img src='$src' style='max-width:100px;max-height:100px' class='img'/>";
-                    $work = $works->where('id', $branch['work_id'])->first()->title;
+                    $work = $works->first()->title;
                     return "ワークタイトル：{$work}  / 画像：{$logo}";
                 });
             }));

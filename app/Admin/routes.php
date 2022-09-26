@@ -22,7 +22,8 @@ Route::group([
     $router->resource('work-categories', 'WorkCategoryController');
     $router->resource('work-sort', 'WorkSortController', ['only' => ['index', 'store']]);
     $router->resource('work-category-sort', 'WorkCategorySortController', ['only' => ['index', 'store']]);
-    $router->resource('work-image-sort', 'WorkImageSortController', ['only' => ['index', 'store']]);
+    $router->resource('work-image-sort', 'WorkImageSortSelectController', ['only' => ['index']]);
+    $router->resource('{work}/work-image-sort', 'WorkImageSortController', ['only' => ['index', 'store']]);
 
     $router->resource('skils', 'SkilController');
     $router->resource('skil-sort', 'SkilSortController', ['only' => ['index', 'store']]);

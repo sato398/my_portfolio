@@ -24,7 +24,7 @@ class WorkSortController extends Controller
             $content->body(Work::tree(function ($tree) use ($works) {
                 $tree->disableCreate();
                 $tree->branch(function ($branch) use ($works) {
-                    $category = $works->where('id', $branch['work_category_id'])->first()->workCategory->name;
+                    $category = $works->where('work_category_id', $branch['work_category_id'])->first()->workCategory->name;
                     $name = $branch['title'];
                     return "カテゴリー：{$category} / タイトル：{$name}";
                 });
