@@ -33,14 +33,12 @@ class BaseToolController extends AdminController
 
         $grid->model()->orderBy('base_tool_category_id', 'asc');
 
-        // $grid->column('id', __('Id'));
         $grid->column('name', 'ツール名');
         $grid->column('slug', 'スラッグ');
         $grid->column('base_tool_category_id', 'カテゴリー')->display(function () use ($baseToolCatogories) {
             return $baseToolCatogories->where('id', $this->base_tool_category_id)->first()->name;
         });
         $grid->column('sort', 'ソート番号')->sortable();
-        // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
         })->sortable();
@@ -61,12 +59,10 @@ class BaseToolController extends AdminController
     {
         $show = new Show(BaseTool::findOrFail($id));
 
-        // $show->field('id', __('Id'));
         $show->field('name', 'ツール名');
         $show->field('slug', 'スラッグ');
         $show->field('base_tool_category_id', 'カテゴリー名');
         $show->field('sort', 'ソート番号');
-        // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
         });
@@ -91,8 +87,8 @@ class BaseToolController extends AdminController
             BaseToolCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\BaseToolCategory,id');
-        $form->text('name', 'ツール名');
-        $form->text('slug', 'スラッグ');
+        $form->text('name', 'ツール名')->rules('required');
+        $form->text('slug', 'スラッグ')->rules('required');
         $form->hasMany('baseToolVersions', 'バージョン', function (Form\NestedForm $versionsForm) {
             $versionsForm->text('version', 'バージョン');
         })->useTable();
@@ -106,9 +102,6 @@ class BaseToolController extends AdminController
             $slug = Str::lower($slug);
             $form->input('slug', $slug);
         });
-
-        // $form->number('sort', __('Sort'));
-        // $form->number('parent_id', __('Parent id'));
 
         return $form;
     }

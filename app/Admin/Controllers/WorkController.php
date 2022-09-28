@@ -39,11 +39,9 @@ class WorkController extends AdminController
 
         $grid->model()->orderBy('sort', 'asc');
 
-        // $grid->column('id', __('Id'));
         $grid->column('title', 'タイトル');
         $grid->column('slug', 'スラッグ');
         $grid->workCategory()->name('カテゴリー名');
-        // $grid->column('explanation', '説明');
         $grid->column('sort', 'ソート順')->sortable();
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
@@ -65,10 +63,8 @@ class WorkController extends AdminController
     {
         $show = new Show(Work::findOrFail($id));
 
-        // $show->field('id', __('Id'));
         $show->field('title', 'タイトル');
         $show->field('slug', 'スラッグ');
-        // $show->field('work_category_id', 'カテゴリー');
         $show->workCategory('カテゴリー', function ($workCategory) {
             $workCategory->field('name', 'カテゴリー名');
             $workCategory->field('name_en', 'カテゴリー名(英語)');
@@ -83,6 +79,7 @@ class WorkController extends AdminController
         $show->field('explanation', '説明')->as(function ($content) {
             return "{$content}";
         });
+        $show->field('production_period', '制作期間');
         $show->workImages('画像', function ($images) {
             $images->model()->orderBy('sort', 'asc');
             $images->resource('/admin/images');
@@ -90,7 +87,6 @@ class WorkController extends AdminController
             $images->disableCreateButton();
             $images->disableExport();
 
-            // $images->id();
             $images->type('ツール')->display(function ($type) {
                 return WorkImageTypeEnum::getDescription($type);
             });
@@ -137,7 +133,8 @@ class WorkController extends AdminController
             WorkCategory::orderBy('sort', 'asc')->get()
             ->pluck('name', 'id')
         )->rules('required|exists:App\Models\WorkCategory,id');
-        $form->ckeditor('explanation', '説明');
+        $form->ckeditor('explanation', '説明')->rules('required');
+        $form->text('production_period', '制作期間');
         $form->text('url', 'URL');
         $form->text('basic_user_name', 'ユーザー名');
         $form->text('basic_user_password', 'パスワード');

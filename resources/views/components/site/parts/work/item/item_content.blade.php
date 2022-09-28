@@ -15,36 +15,49 @@
             @endphp
             {!! $content !!}
         </div>
-        <div class="text-center work-item-tools">使用したツール
-            <p class="text-center work-item-tool mt-1">
-                @foreach ($item->baseTools->sortBy('sort') as $tool)
-                    @if ($loop->last)
-                        {{ $tool->name }}
-                    @else
-                        {{ $tool->name }}<span class="slash"> /</span><br class="br">
-                    @endif
-                @endforeach
-            </p>
-        </div>
-        <div class="text-center work-item-positions">担当箇所
-            <p class="text-center work-item-position mt-1">
-                @foreach ($item->basePositions->sortBy('sort') as $position)
-                    @if ($loop->last)
-                        {{ $position->name }}
-                    @else
-                        {{ $position->name }}<span class="slash"> /</span><br class="br">
-                    @endif
-                @endforeach
-            </p>
-        </div>
-        @if (isset($item->url))
+        @if (!$item->baseTools->isEmpty())
+            <div class="text-center work-item-tools">使用したツール
+                <p class="text-center work-item-tool mt-1">
+                    @foreach ($item->baseTools->sortBy('sort') as $tool)
+                        @if ($loop->last)
+                            {{ $tool->name }}
+                        @else
+                            {{ $tool->name }}<span class="slash"> /</span><br class="br">
+                        @endif
+                    @endforeach
+                </p>
+            </div>
+        @endif
+
+        @if (!$item->basePositions->isEmpty())
+            <div class="text-center work-item-positions">担当箇所
+                <p class="text-center work-item-position mt-1">
+                    @foreach ($item->basePositions->sortBy('sort') as $position)
+                        @if ($loop->last)
+                            {{ $position->name }}
+                        @else
+                            {{ $position->name }}<span class="slash"> /</span><br class="br">
+                        @endif
+                    @endforeach
+                </p>
+            </div>
+        @endif
+
+        @if (!empty($item->production_period))
+            <div class="text-center mt-5">
+                <p class="text-center work-item-position mt-1">
+                    制作期間：{{ $item->production_period }}
+                </p>
+            </div>
+        @endif
+        @if (!empty($item->url))
             <div class="text-center work-item-url mt-5">
                 <p class="text-center work-item-position mt-1">
                     リンク：<a href="{{ $item->url }}" target="__blank">{{ $item->title }}</a>
                 </p>
             </div>
         @endif
-        @if (isset($item->basic_user_name))
+        @if (!empty($item->basic_user_name))
         <div class="text-center work-item-basic">
             <p class="text-center work-item-basic-name mt-1">
                 ユーザー名：{{ $item->basic_user_name }}

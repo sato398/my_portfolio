@@ -77,10 +77,8 @@ class BasePositionController extends AdminController
     {
         $form = new Form(new BasePosition());
 
-        $form->text('name', '担当範囲名');
-        $form->text('slug', 'スラッグ');
-        // $form->number('sort', __('Sort'));
-        // $form->number('parent_id', __('Parent id'));
+        $form->text('name', '担当範囲名')->rules('required');
+        $form->text('slug', 'スラッグ')->rules('required');
 
         $form->confirm('本当に登録しますか？', 'create');
         $form->confirm('本当に変更しますか？', 'edit');

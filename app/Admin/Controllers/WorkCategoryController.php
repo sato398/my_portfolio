@@ -30,12 +30,10 @@ class WorkCategoryController extends AdminController
 
         $grid->model()->orderBy('sort', 'asc');
 
-        // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
         $grid->column('name_en', 'カテゴリー名(英語)');
         $grid->column('slug', 'スラッグ');
         $grid->column('sort', 'ソート順')->sortable();
-        // $grid->column('parent_id', __('Parent id'));
         $grid->column('created_at', '作成日時')->display(function () {
             return Carbon::parse($this->created_at)->format('Y/m/d H:i:s');
         })->sortable();
@@ -56,12 +54,10 @@ class WorkCategoryController extends AdminController
     {
         $show = new Show(WorkCategory::findOrFail($id));
 
-        // $show->field('id', __('Id'));
         $show->field('name', 'カテゴリー名');
         $show->field('name_en', 'カテゴリー名(英語)');
         $show->field('slug', 'スラッグ');
         $show->field('sort', 'ソート順');
-        // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
         });
@@ -81,9 +77,9 @@ class WorkCategoryController extends AdminController
     {
         $form = new Form(new WorkCategory());
 
-        $form->text('name', 'カテゴリー名');
-        $form->text('name_en', 'カテゴリー名(英語)');
-        $form->text('slug', 'スラッグ');
+        $form->text('name', 'カテゴリー名')->rules('required');
+        $form->text('name_en', 'カテゴリー名(英語)')->rules('required');
+        $form->text('slug', 'スラッグ')->rules('required');
 
         $form->confirm('本当に登録しますか？', 'create');
         $form->confirm('本当に変更しますか？', 'edit');
@@ -94,9 +90,6 @@ class WorkCategoryController extends AdminController
             $slug = Str::lower($slug);
             $form->input('slug', $slug);
         });
-
-        // $form->number('sort', __('Sort'));
-        // $form->number('parent_id', __('Parent id'));
 
         return $form;
     }

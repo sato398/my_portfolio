@@ -37,7 +37,6 @@ class SkilController extends AdminController
 
         $grid->model()->orderBy('sort', 'asc');
 
-        // $grid->column('id', __('Id'));
         $grid->baseToolCategory()->name('カテゴリー名');
         $grid->column('sort', 'ソート順')->sortable();
         $grid->column('items', 'ツール')->display(function () {
@@ -73,9 +72,7 @@ class SkilController extends AdminController
     {
         $show = new Show(Skil::findOrFail($id));
 
-        // $show->field('id', __('Id'));
         $show->field('base_tool_category_id', 'カテゴリー名');
-        // $show->field('parent_id', __('Parent id'));
         $show->field('created_at', '作成日時')->as(function ($createdAt) {
             return Carbon::parse($createdAt)->format('Y/m/d H:i:s');
         });

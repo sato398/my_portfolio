@@ -28,7 +28,6 @@ class BaseToolCategoryController extends AdminController
     {
         $grid = new Grid(new BaseToolCategory());
 
-        // $grid->column('id', __('Id'));
         $grid->column('name', 'カテゴリー名');
         $grid->column('name_en', 'カテゴリー名(英語)');
         $grid->column('slug', 'スラッグ');
@@ -75,9 +74,9 @@ class BaseToolCategoryController extends AdminController
     {
         $form = new Form(new BaseToolCategory());
 
-        $form->text('name', 'カテゴリー名');
-        $form->text('name_en', 'カテゴリー名(英語)');
-        $form->text('slug', 'スラッグ');
+        $form->text('name', 'カテゴリー名')->rules('required');
+        $form->text('name_en', 'カテゴリー名(英語)')->rules('required');
+        $form->text('slug', 'スラッグ')->rules('required');
 
         $form->confirm('本当に登録しますか？', 'create');
         $form->confirm('本当に変更しますか？', 'edit');
