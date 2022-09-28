@@ -44,7 +44,6 @@ jobs:
             php artisan key:generate --env=testing
             php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
             php artisan migrate --env=testing
-            php artisan db:seed --env=testing
 
       - node/install-packages:
           cache-version: test
