@@ -1,4 +1,5 @@
 <div class="about-section-wrap">
+
     <section class="about-section" id="more">
         <div class="intro-body w-100">
             <div class="container">
@@ -12,6 +13,7 @@
         </div>
         <div class="section-arrow about-section-arrow"></div>
     </section>
+
     <section class="about-section" id="hobby">
         <div class="intro-body w-100">
             <div class="container">
@@ -25,6 +27,7 @@
         </div>
         <div class="section-arrow about-section-arrow"></div>
     </section>
+
     <section class="about-section" id="laravel">
         <div class="intro-body w-100">
             <div class="container">
@@ -37,4 +40,5 @@
             </div>
         </div>
     </section>
+
 </div>

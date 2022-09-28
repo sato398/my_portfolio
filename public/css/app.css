@@ -4,6 +4,17 @@
   white-space: normal !important;
 }
 
+@media (min-width: 0px) {
+  .text-sm-left {
+    text-align: left;
+  }
+}
+@media (min-width: 768px) {
+  .text-sm-left {
+    text-align: center;
+  }
+}
+
 .isWhite {
   color: #fff !important;
 }
@@ -448,29 +459,29 @@
   display: flex;
   align-items: center;
 }
-.about-section#more {
+.about-section#first {
   background-image: url(/storage/images/office-ge4b71a64b_1920.jpg);
 }
 @media (min-width: 768px) {
-  .about-section#more .about-inner {
+  .about-section#first .about-inner {
     text-align: start;
   }
 }
-.about-section#hobby {
+.about-section#second {
   background-image: url(/storage/images/nik-korba-3WceTBlUoMs-unsplash.jpg);
 }
 @media (min-width: 768px) {
-  .about-section#hobby .about-inner {
+  .about-section#second .about-inner {
     text-align: center;
   }
 }
-.about-section#laravel {
+.about-section#third {
   background-image: url(/storage/images/mohammad-rahmani-Y5yxdx2a4PI-unsplash.jpg);
   background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 @media (min-width: 768px) {
-  .about-section#laravel .about-inner {
+  .about-section#third .about-inner {
     text-align: start;
   }
 }

@@ -28,4 +28,7 @@ Route::group([
     $router->resource('skils', 'SkilController');
     $router->resource('skil-sort', 'SkilSortController', ['only' => ['index', 'store']]);
     $router->resource('skil-tool-sort', 'SkilToolSortController', ['only' => ['index', 'store']]);
+
+    $router->get('options', 'OptionController@create')->name('options.create');
+    $router->post('options', 'OptionController@store')->name('options.store');
 });
