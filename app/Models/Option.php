@@ -28,33 +28,33 @@ class Option extends Model
      *
      * @return self
      */
-    public function getOptions(bool $wantArray = false) : self
+    public function getOptions(bool $wantArray = false): self
     {
         $options = static::all();
 
-        if($wantArray){
+        if ($wantArray) {
             $optionsArray = [];
         }
 
-        $options->each(function($option) use ($wantArray, &$optionsArray){
+        $options->each(function ($option) use ($wantArray, &$optionsArray) {
             $name = $option->name;
 
-            if(!is_null($option->value)){
+            if (!is_null($option->value)) {
                 $value = $option->value;
-            }elseif(!is_null($option->json)){
+            } elseif (!is_null($option->json)) {
                 $value = $option->json;
-            }else{
+            } else {
                 $value = null;
             }
 
-            if($wantArray){
+            if ($wantArray) {
                 $optionsArray[$name] = $value;
-            }else{
+            } else {
                 $this->$name = $value;
             }
         });
 
-        if($wantArray){
+        if ($wantArray) {
             $this->options = $optionsArray;
         }
 
@@ -68,19 +68,19 @@ class Option extends Model
      *
      * @return bool
      */
-    public function saveOptions(array $options) : bool
+    public function saveOptions(array $options): bool
     {
-        try{
-            foreach($options as $optionName => $optionValue){
-                if(is_scalar($optionValue)){
+        try {
+            foreach ($options as $optionName => $optionValue) {
+                if (is_scalar($optionValue)) {
                     $column = 'value';
                     $otherColumn = 'json';
                     $value = $optionValue ?: '';
-                }elseif(is_null($optionValue)){
+                } elseif (is_null($optionValue)) {
                     $column = 'value';
                     $otherColumn = 'json';
                     $value = null;
-                }else{
+                } else {
                     $column = 'json';
                     $otherColumn = 'value';
                     $value = collect($optionValue ?: [])->filter()->toArray();
@@ -94,7 +94,7 @@ class Option extends Model
                 ]);
             }
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return false;
         }
     }

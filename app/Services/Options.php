@@ -10,7 +10,7 @@ class Options
 
     public function __construct()
     {
-        $this->options = (new Option)->getOptions();
+        $this->options = (new Option())->getOptions();
     }
 
     public function get()

@@ -23,7 +23,7 @@ class WorkImageSortController extends Controller
         return Admin::content(function (Content $content) use ($works, $workId) {
             $content->header('画像の並び順/' . $works->first()->title);
             $content->body(WorkImage::tree(function ($tree) use ($works, $workId) {
-                $tree->query(function($query) use($workId){
+                $tree->query(function ($query) use ($workId) {
                     $query = $query::where('work_id', $workId);
                     return $query;
                 });
