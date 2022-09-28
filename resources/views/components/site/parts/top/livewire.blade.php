@@ -8,7 +8,7 @@
     );
 @endphp
 
-<section class="d-flex masthead top-contents">
+<section class="d-flex masthead top-contents" style="background-image: url({{ '/storage/' . $options->top_image }});">
     <div class="container my-auto text-center">
         <h3 class="mb-5 text-sm-left"><em>{{ $options->top_title_head }}</em></h3>
         <h1 class="mb-1 top-name">{{ $options->top_title }}</h1>

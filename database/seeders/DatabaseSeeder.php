@@ -22,14 +22,14 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MenuSeeder::class,
-            // AdminUserSeeder::class,
-            // BaseToolCategorySeeder::class,
-            // BasePositionSeeder::class,
-            // BaseToolSeeder::class,
-            // SkilSeeder::class,
-            // SkilToolSeeder::class,
-            // WorkCategorySeeder::class,
-            // BaseToolVersionSeeder::class,
+            AdminUserSeeder::class,
+            BaseToolCategorySeeder::class,
+            BasePositionSeeder::class,
+            BaseToolSeeder::class,
+            SkilSeeder::class,
+            SkilToolSeeder::class,
+            WorkCategorySeeder::class,
+            BaseToolVersionSeeder::class,
             OptionsSeeder::class,
         ]);
     }
