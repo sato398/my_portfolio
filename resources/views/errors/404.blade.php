@@ -1,6 +1,6 @@
 @php($key = 'errors.404')
 
-@extends('errors::errors')
+@extends('errors.errors')
 
 @section('title', '404 Not Found')
 @section('code', '404')
