@@ -19,9 +19,7 @@
     display: flex;
     align-items: center;
 
-    &#more{
-        background-image: url(/storage/images/office-ge4b71a64b_1920.jpg);
-
+    &#first{
          .about-inner {
             @include md {
                 text-align: start;
@@ -29,9 +27,7 @@
         }
     }
 
-    &#hobby{
-        background-image: url(/storage/images/nik-korba-3WceTBlUoMs-unsplash.jpg);
-
+    &#second{
          .about-inner {
             @include md {
                 text-align: center;
@@ -39,8 +35,7 @@
         }
     }
 
-    &#laravel{
-        background-image: url(/storage/images/mohammad-rahmani-Y5yxdx2a4PI-unsplash.jpg);
+    &#third{
         background-color: rgba(255, 255, 255, .2);
         color: #fff;
 

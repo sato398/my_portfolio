@@ -14,3 +14,13 @@
     font-weight: 400 !important;
     font-style: normal !important;
 }
+
+.text-sm-left{
+    @include sx {
+        text-align: left;
+    }
+
+    @include md {
+        text-align: center;
+    }
+}

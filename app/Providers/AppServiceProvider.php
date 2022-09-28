@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Encore\Admin\Form\NestedForm as NestedFormOrigin;
 use App\Admin\Extensions\Form\NestedForm;
 use App\Seo\SingletonWorkModelForSeo;
+use App\Services\Options;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\App;
 
@@ -17,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
      * @var array
      */
     public $singletons = [
-        'SingletonWorkModelForSeo' => SingletonWorkModelForSeo::class
+        'SingletonWorkModelForSeo' => SingletonWorkModelForSeo::class,
+        'Options' => Options::class,
     ];
 
     /**
