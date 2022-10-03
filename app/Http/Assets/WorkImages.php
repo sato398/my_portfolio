@@ -18,7 +18,6 @@ class WorkImages
         $this->item = $item;
         $this->itemImage = $item->workImages->sortBy('sort')->first();
         $this->imagePath = isset($this->itemImage->path) ? url('/storage' . $this->itemImage->path) : null;
-        // $this->doTrim = (bool) ($this->itemImage->cover ?? true);
     }
 
     public static function item(Work $item)
@@ -38,11 +37,7 @@ class WorkImages
                 </svg>
             HTML;
         } else {
-            // if($this->doTrim){
-            //     $this->html = '<img class="d-block w-100 h-100 object-fit-cover" src="' . $this->imagePath. '" alt="'. $this->item->name .'の画像" />';
-            // }else{
-                $this->html = '<img class="d-block mw-100 mh-100" src="' . $this->imagePath . '" alt="' . $this->item->name . 'の画像" />';
-            // }
+            $this->html = '<img class="d-block mw-100 mh-100" src="' . $this->imagePath . '" alt="' . $this->item->name . 'の画像" />';
         }
     }
 

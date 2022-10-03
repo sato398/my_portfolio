@@ -23,11 +23,9 @@ class Ogp
             default => 'article',
         };
 
-        //商品ページなら商品画像を
-        //それ以外は、サイト、ストアのOGP画像を返す
+        //OGP画像を返す
         $image = match ($key) {
-            'site.work-item' => '',
-            default => '',
+            default => '/storage/ogp/Nogpimage.png',
         };
 
         $topTitle = 'Nao\'s Portfolio';
