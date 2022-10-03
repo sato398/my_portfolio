@@ -25,7 +25,7 @@ class Ogp
 
         //OGP画像を返す
         $image = match ($key) {
-            default => '/storage/ogp/Nogpimage.png',
+            default => url('/storage/ogp/Nogpimage.png'),
         };
 
         $topTitle = 'Nao\'s Portfolio';
