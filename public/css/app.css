@@ -82,6 +82,10 @@
   flex-grow: 0 !important;
 }
 
+.navbar-brand {
+  margin-right: 1.2rem;
+}
+
 .top-contents {
   background-attachment: fixed !important;
   background-size: cover !important;

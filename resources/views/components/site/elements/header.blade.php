@@ -6,7 +6,7 @@
     <nav class="navbar navbar-light navbar-expand-md py-3 fixed-top">
         <div class="container justify-content-center navber-inner">
             <a class="navbar-brand d-flex align-items-center hover-action" href="{{ route('top') }}">
-                <span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon">
+                <span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center bs-icon">
                     <svg class="w-100" version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
                         <g>
                             <path class="st0" d="M81.78,57.74c-3.29,20.55-23.15,46.44-40.69,46.44c-9.18,0-14.79-5.48-14.79-14.93
